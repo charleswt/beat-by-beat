@@ -53,27 +53,23 @@ document.getElementById("audioDbSearch").addEventListener("keydown", function(ev
 });
 
 //Your API key for theaudiodb.com
-const apiKey = '523532';
-
 //Function to search for an artist
 function searchArtist() {
-    const artistName = document.getElementById("audioDbSearch").value;
+  const artistName = document.getElementById("audioDbSearch").value;
+  const serverUrl = `/searchArtist?artist=${encodeURIComponent(artistName)}`;
 
-    //URL endpoint for artist search on theaudiodb.com
-    const apiUrl = `https://www.theaudiodb.com/api/v1/json/${apiKey}/search.php?s=${artistName}`;
-
-    //Make the API request and handle the response
-    fetch(apiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-            displayArtistInfo(data);
-            fetchMusicVideos(data);
-            getMusicBrainzData(data);
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
+  fetch(serverUrl)
+      .then((response) => response.json())
+      .then((data) => {
+          displayArtistInfo(data);
+          fetchMusicVideos(data);
+          getMusicBrainzData(data);
+      })
+      .catch((error) => {
+          console.error("Error:", error);
+      });
 }
+
 
 //Function to display artist information
 function displayArtistInfo(data) {
@@ -105,23 +101,22 @@ function displayArtistInfo(data) {
 
 //Function to fetch music videos
 function fetchMusicVideos(data) {
-    if (data && data.artists) {
-        const artistId = data.artists[0].idArtist;
+  if (data && data.artists) {
+    const artistId = data.artists[0].idArtist;
 
-        //URL endpoint for fetching music videos using the TADB_Artist_ID
-        const apiUrl = `https://www.theaudiodb.com/api/v1/json/${apiKey}/mvid.php?i=${artistId}`;
+    const serverUrl = `/fetchMusicVideos?artistId=${encodeURIComponent(artistId)}`;
 
-        //Make the API request and handle the response
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((musicVideosData) => {
-                displayMusicVideos(musicVideosData);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
+    fetch(serverUrl)
+      .then((response) => response.json())
+      .then((musicVideosData) => {
+        displayMusicVideos(musicVideosData);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 }
+
 
 
 //Function to display music videos as links with each title on a new line, along with the corresponding thumbnail
@@ -185,25 +180,23 @@ function getYouTubeVideoId(url) {
 //Function to grab more Artisit data from Musicbrainz APi by using MBID thats given from the audioDb request in the artist object
 function getMusicBrainzData(data) {
   if (data && data.artists) {
-      const strMusicBrainzID = data.artists[0].strMusicBrainzID;
-      if (strMusicBrainzID) {
-          const musicBrainzApiUrl = `https://musicbrainz.org/ws/2/artist/${strMusicBrainzID}?fmt=json`;
+    const mbId = data.artists[0].strMusicBrainzID;
 
-          fetch(musicBrainzApiUrl)
-              .then((response) => response.json())
-              .then((musicBrainzData) => {
-                  displayMusicBrainzData(musicBrainzData);
-              })
-              .catch((error) => {
-                  console.error("Error fetching from MusicBrainz:", error);
-              });
-      } else {
-          console.error("No MusicBrainz ID found for the artist.");
-      }
+    const serverUrl = `/getMusicBrainzData?mbId=${encodeURIComponent(mbId)}`;
+
+    fetch(serverUrl)
+      .then((response) => response.json())
+      .then((musicBrainzData) => {
+        displayMusicBrainzData(musicBrainzData);
+      })
+      .catch((error) => {
+        console.error("Error fetching from MusicBrainz:", error);
+      });
   } else {
-      console.error("No artist data available to retrieve MusicBrainz ID.");
+    console.error("No artist data available to retrieve MusicBrainz ID.");
   }
 }
+
 
 //Function to display the results in a container ID mb Results
 function displayMusicBrainzData(musicBrainzData) {
