@@ -1,42 +1,44 @@
 const path = require('path');
 const express = require('express');
-//const exphbs = require('express-handlebars'); //commented out untill can get functioning
-//const routes = require('./controllers');
-//const helpers = require('./utils/helpers');
+const exphbs = require('express-handlebars'); //commented out untill can get functioning
+const routes = require('./controllers');
+const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
-require('dotenv').config();
 const fetch = require('node-fetch');
-//const crypto = require('crypto');
+const crypto = require('crypto');
+
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 //server session with crypto
-//const secretCrypto = crypto.randomBytes(12).toString('hex');
-//const sess = {
- // secret: secretCrypto,
- // cookie: {
-  //  maxAge: 24 * 60 * 60 * 1000, //1 day
-  //  httpOnly: true,
-  //  secure: false,
- //   sameSite: 'strict',
-//  },
-//  resave: false,
-//  saveUninitialized: true,
-//  store: new SequelizeStore({
- //   db: sequelize,
- // }),
-//};
+const secretCrypto = crypto.randomBytes(12).toString('hex');
+const sess = {
+ secret: secretCrypto,
+ cookie: {
+   maxAge: 24 * 60 * 60 * 1000, //1 day
+   httpOnly: true,
+   secure: false,
+   sameSite: 'strict',
+ },
+ resave: false,
+ saveUninitialized: true,
+ store: new SequelizeStore({
+   db: sequelize,
+ }),
+};
 //console.log(secretCrypto);
-//app.use(session(sess));
+app.use(session(sess));
 
 //commented out untill can get functioning
 // Create the Handlebars.js engine object with custom helper functions
-//const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({ helpers });
 
 // Inform Express.js which template engine we're using
-//app.engine('handlebars', hbs.engine);
-//app.set('view engine', 'handlebars');
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -98,7 +100,7 @@ app.get('/getMusicBrainzData', async (req, res) => {
 });
 
 //commented out untill can get functioning
-//app.use(routes);
+app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));

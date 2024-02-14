@@ -1,10 +1,14 @@
 const router = require('express').Router();
-const User = require('../models/index');
 
 router.get('/', async (req, res) => {
-  // Send the rendered Handlebars.js template back as the response
-  const data = await User.findAll({ raw: true });
-  res.render('homepage', data);
+  try {
+    // Get all projects and JOIN with user data
+
+    // Pass serialized data and session flag into template
+    res.render('homepage');
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
