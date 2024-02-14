@@ -7,6 +7,7 @@ const sequelize = require('./config/connection');
 require('dotenv').config();
 const fetch = require('node-fetch');
 const crypto = require('crypto');
+const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
