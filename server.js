@@ -4,11 +4,12 @@ const exphbs = require('express-handlebars'); //commented out untill can get fun
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
-require('dotenv').config();
 const fetch = require('node-fetch');
 const crypto = require('crypto');
+
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -28,7 +29,7 @@ const sess = {
    db: sequelize,
  }),
 };
-console.log(secretCrypto);
+//console.log(secretCrypto);
 app.use(session(sess));
 
 //commented out untill can get functioning
