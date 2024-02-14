@@ -237,7 +237,7 @@ function gameUpdate() {
   player2AI(ball, paddleRight);
   ballPaddleCollision(ball, paddleRight);
   increaseScore(ball, paddleLeft, paddleRight);
-  adjustAIDifficulty(paddleLeft, paddleRight);
+  adjustAIDifficulty(paddleLeft, paddleRight, ball);
 }
 
 //dynamically update the ball and paddle's position by updating its position
