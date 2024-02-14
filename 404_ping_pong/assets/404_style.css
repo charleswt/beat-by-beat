@@ -21,31 +21,35 @@ h1 {
 /* score in the middle */
 #player1Score {
   left: 35%;
+  font-family: "Sixtyfour", sans-serif;
+
 }
 #player2Score {
   right: 35%;
+  font-family: "Sixtyfour", sans-serif;
+
 }
 
-@keyframes animateCircle {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+
+p {
+  margin-top: 0;
+  font-size: 80px;
+  text-align: center;
+  color: #4ec7ff;
+  text-shadow: 0px 0px 1000px #38d1ff;
+  filter: drop-shadow(0px 0px 0px #38d1ff);
+  /*font style*/
+  font-family: "Sixtyfour", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "BLED" 0,
+    "SCAN" -43;
 }
 
-@keyframes animate {
-  0% {
-    transform: rotate(45deg);
-  }
-  100% {
-    transform: rotate(405deg);
-  }
-}
-
+/*flickering effect*/
 @keyframes flickering {
-  /* Assuming you want a flickering effect but didn't include the keyframes */
   0%,
   19%,
   21%,
@@ -63,21 +67,34 @@ h1 {
   }
 }
 
-p {
-  margin-top: 0;
-  font-size: 80px;
-  text-align: center;
-  color: #4ec7ff;
-  text-shadow: 0px 0px 1000px #38d1ff;
-  filter: drop-shadow(0px 0px 0px #38d1ff);
-}
-
 .flickering {
-  animation: flickering 0.7s infinite;
-  -webkit-animation: flickering 0.88s infinite; /* For better cross-browser compatibility */
+  animation: flickering 1.5s infinite;
+  -webkit-animation: flickering 1s infinite;
   color: white;
 }
 
 .bigger {
   font-size: 135px;
+}
+
+.canvas-container {
+  position: relative;
+  width: 100%; 
+  height: 100vh;
+}
+
+#canvas {
+  width: 100%;
+  height: 100%;
+  display: block; 
+}
+
+/*setting up the font in the middle of the canvas*/
+.inside-canvas {
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  color: white; 
+  text-align: center;
 }
