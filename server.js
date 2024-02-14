@@ -6,30 +6,29 @@ const express = require('express');
 const sequelize = require('./config/connection');
 require('dotenv').config();
 const fetch = require('node-fetch');
-const crypto = require('crypto');
+//const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 //server session with crypto
-const secretCrypto = crypto.randomBytes(12).toString('hex');
-const sess = {
-  secret: secretCrypto,
-  cookie: {
-    maxAge: 24 * 60 * 60 * 1000, //1 day
-    httpOnly: true,
-    secure: false,
-    sameSite: 'strict',
-  },
-  resave: false,
-  saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize,
-  }),
-};
-console.log(secretCrypto);
-
-app.use(session(sess));
+//const secretCrypto = crypto.randomBytes(12).toString('hex');
+//const sess = {
+ // secret: secretCrypto,
+ // cookie: {
+  //  maxAge: 24 * 60 * 60 * 1000, //1 day
+  //  httpOnly: true,
+  //  secure: false,
+ //   sameSite: 'strict',
+//  },
+//  resave: false,
+//  saveUninitialized: true,
+//  store: new SequelizeStore({
+ //   db: sequelize,
+ // }),
+//};
+//console.log(secretCrypto);
+//app.use(session(sess));
 
 //commented out untill can get functioning
 // Create the Handlebars.js engine object with custom helper functions
