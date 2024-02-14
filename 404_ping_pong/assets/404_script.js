@@ -219,12 +219,12 @@ function adjustAIDifficulty(paddleLeft, paddleRight, ball) {
   // AI is leading by more than 2 points
   if (paddleRight.score - paddleLeft.score > 2) {
     //speed down the ball 
-    ball.velocity -= -0.5;
-    // Player is leading by more than 2 points
+    ball.velocity.x *= (Math.abs(ball.velocity.x) > 2) ? 0.9 : 1;
+    ball.velocity.y *= (Math.abs(ball.velocity.y) > 2) ? 0.9 : 1;    
   } else if (paddleLeft.score - paddleRight.score > 2) {
     //speed up the ball 
-    ball.velocity += 0.5;
-  }
+    ball.velocity.x *= 1.5;
+    ball.velocity.y *= 1.5;  }
 }
 
 //function to update the ball and paddles position
