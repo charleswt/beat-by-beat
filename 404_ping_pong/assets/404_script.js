@@ -11,6 +11,7 @@ const keyPressed = [];
 const KeyUp = 38;
 //down-arrow
 const KeyDown = 40;
+const playerSpeed = 5;
 
 //when a key is pressed, the keycode of the pressed key is stored in the 'keyPressed' array with a value of true
 window.addEventListener("keydown", function (e) {
@@ -35,6 +36,18 @@ function ballCollision(ball) {
   //if the ball touches the top, bounces bounces back
   if (ball.pos.y + ball.radius <= marginTop) {
     ball.velocity.y *= -1;
+  }
+}
+//function to implement a ball bouncing when it touches the paddle
+function ballPaddleCollision(ball, paddle) {
+  let dx = Math.abs(ball.pos.x - paddle.getCenter().x);
+  let dy = Math.abs(ball.pos.y - paddle.getCenter().y);
+
+  if (
+    dx <= ball.radius + paddle.getHalfWidth() &&
+    dy <= paddle.getHalfHeight() + ball.radius
+  ) {
+    ball.velocity.x *= -1;
   }
 }
 
@@ -92,7 +105,6 @@ function Paddle(pos, velocity, width, height) {
     );
   };
 }
-
 //Ball class to create a ball that takes x and y coordinate position, velocity, and radius
 function Ball(pos, velocity, radius) {
   this.pos = pos;
@@ -120,30 +132,47 @@ function Ball(pos, velocity, radius) {
   };
 }
 
-//function to implement a ball bouncing when it touches the paddle
-function ballPaddleCollision(ball, paddle) {
-  let dx = Math.abs(ball.pos.x - paddle.getCenter().x);
-  let dy = Math.abs(ball.pos.y - paddle.getCenter().y);
-
-  if (
-    dx <= ball.radius + paddle.getHalfWidth() &&
-    dy <= paddle.getHalfHeight() + ball.radius
-  ) {
-    ball.velocity.x *= -1;
-  }
-}
-
 //create a ball
-const ball = new Ball(vec2(150, 300), vec2(2, 2), 10);
+const ball = new Ball(vec2(150, 300), vec2(4, 4), 10);
 //create paddles on each sides
-const paddleLeft = new Paddle(vec2(0, 50), vec2(5, 5), 20, 100);
+const paddleLeft = new Paddle(vec2(0, 50), vec2(5, playerSpeed), 20, 100);
 //x-center should be width - 20 because it occupies 20 width of the canvas
 const paddleRight = new Paddle(
   vec2(canvas.width - 20, 50),
-  vec2(5, 5),
+  vec2(5, playerSpeed),
   20,
   100
 );
+
+//functino to create a player 2 (AI)
+function player2AI(ball, paddle) {
+  //set up the min speed and max speed of the paddle 
+  const minSpeed = 3;
+  const maxSpeed = 5;
+  //randomly choose the spee 
+  paddle.velocity.y = Math.random() * (maxSpeed - minSpeed) + minSpeed;
+  //if the ball is moving to the rightside
+  if (ball.velocity.x > 0) {
+    //and the ball is below the paddle
+    if (ball.pos.y > paddle.pos.y) {
+      //move the paddle downside
+      paddle.pos.y += paddle.velocity.y;
+      //make sure the paddle doesn't pass the canvas
+      if (paddle.pos.y + paddle.height >= canvas.height) {
+        paddle.pos.y = canvas.height - paddle.height;
+      }
+    }
+    //if the ball is above the paddle
+    if (ball.pos.y < paddle.pos.y) {
+      //move the paddle upward
+      paddle.pos.y -= paddle.velocity.y;
+      //make sure the paddle doesn't go above the canvas
+      if (paddle.pos.y <= marginTop) {
+        paddleLeft.pos.y = marginTop;
+      }
+    }
+  }
+};
 
 //function to respawn the ball
 function respawnBall(ball) {
@@ -185,6 +214,19 @@ function increaseScore(ball, paddleLeft, paddleRight) {
   }
 }
 
+//function to adjust AI diffucity
+function adjustAIDifficulty(paddleLeft, paddleRight, ball) {
+  // AI is leading by more than 2 points
+  if (paddleRight.score - paddleLeft.score > 2) {
+    //speed down the ball 
+    ball.velocity -= -0.5;
+    // Player is leading by more than 2 points
+  } else if (paddleLeft.score - paddleRight.score > 2) {
+    //speed up the ball 
+    ball.velocity += 0.5;
+  }
+}
+
 //function to update the ball and paddles position
 function gameUpdate() {
   ball.update();
@@ -195,6 +237,7 @@ function gameUpdate() {
   player2AI(ball, paddleRight);
   ballPaddleCollision(ball, paddleRight);
   increaseScore(ball, paddleLeft, paddleRight);
+  adjustAIDifficulty(paddleLeft, paddleRight);
 }
 
 //dynamically update the ball and paddle's position by updating its position
@@ -202,31 +245,6 @@ function gameDraw() {
   ball.draw();
   paddleLeft.draw();
   paddleRight.draw();
-}
-
-//functino to create a player 2 (AI)
-function player2AI(ball, paddle) {
-  //if the ball is moving to the rightside
-  if (ball.velocity.x > 0) {
-    //and the ball is below the paddle
-    if (ball.pos.y > paddle.pos.y) {
-      //move the paddle downside
-      paddle.pos.y += paddle.velocity.y;
-      //make sure the paddle doesn't pass the canvas
-      if (paddle.pos.y + paddle.height >= canvas.height) {
-        paddle.pos.y = canvas.height - paddle.height;
-      }
-    }
-    //if the ball is above the paddle
-    if (ball.pos.y < paddle.pos.y) {
-      //move the paddle upward
-      paddle.pos.y -= paddle.velocity.y;
-      //make sure the paddle doesn't go above the canvas
-      if (paddle.pos.y <= marginTop) {
-        paddleLeft.pos.y = marginTop;
-      }
-    }
-  }
 }
 
 //function to update the ball's position to implement the animation loop
@@ -240,6 +258,5 @@ function gameLoop() {
   gameUpdate();
   gameDraw();
 }
-
 
 gameLoop();
