@@ -4,9 +4,30 @@ const express = require('express');
 //const routes = require('./controllers');
 //const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
+const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const secretCrypto = crypto.randomBytes(12).toString('hex');
+
+const sess = {
+  secret: secretCrypto,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, //1 day
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
+console.log(secretCrypto);
+
+app.use(session(sess));
 
 // Create the Handlebars.js engine object with custom helper functions
 //const hbs = exphbs.create({ helpers });
