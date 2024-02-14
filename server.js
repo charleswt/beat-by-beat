@@ -1,17 +1,36 @@
 const path = require('path');
 const express = require('express');
-//const exphbs = require('express-handlebars'); //commented out untill can get functioning 
+//const exphbs = require('express-handlebars'); //commented out untill can get functioning
 //const routes = require('./controllers');
 //const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 require('dotenv').config();
 const fetch = require('node-fetch');
-
+//const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-//commented out untill can get functioning 
+//server session with crypto
+//const secretCrypto = crypto.randomBytes(12).toString('hex');
+//const sess = {
+ // secret: secretCrypto,
+ // cookie: {
+  //  maxAge: 24 * 60 * 60 * 1000, //1 day
+  //  httpOnly: true,
+  //  secure: false,
+ //   sameSite: 'strict',
+//  },
+//  resave: false,
+//  saveUninitialized: true,
+//  store: new SequelizeStore({
+ //   db: sequelize,
+ // }),
+//};
+//console.log(secretCrypto);
+//app.use(session(sess));
+
+//commented out untill can get functioning
 // Create the Handlebars.js engine object with custom helper functions
 //const hbs = exphbs.create({ helpers });
 
@@ -26,16 +45,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 //fetch artist data from AudioDB
 app.get('/searchArtist', async (req, res) => {
   const artistName = req.query.artist;
-  const apiKey = process.env.API; 
+  const apiKey = process.env.API;
   const apiUrl = `https://www.theaudiodb.com/api/v1/json/${apiKey}/search.php?s=${artistName}`;
 
   try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      res.send(data); 
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    res.send(data);
   } catch (error) {
-      console.error('Error:', error);
-      res.status(500).send('Server error');
+    console.error('Error:', error);
+    res.status(500).send('Server error');
   }
 });
 
@@ -65,7 +84,7 @@ app.get('/getMusicBrainzData', async (req, res) => {
 
   try {
     const response = await fetch(apiUrl, {
-      headers: { 'User-Agent': 'YourAppName/1.0.0 ( YourEmail@example.com )' }
+      headers: { 'User-Agent': 'YourAppName/1.0.0 ( YourEmail@example.com )' },
     });
     if (!response.ok) {
       throw new Error(`API request failed with status ${response.status}`);
@@ -78,7 +97,7 @@ app.get('/getMusicBrainzData', async (req, res) => {
   }
 });
 
-//commented out untill can get functioning 
+//commented out untill can get functioning
 //app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
