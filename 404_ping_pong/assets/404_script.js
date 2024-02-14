@@ -86,7 +86,7 @@ function Paddle(pos, velocity, width, height) {
 
   //draw method to create a rectangle(paddle) that takes x-center, y-center, width, and height)
   this.draw = function () {
-    ctx.fillStyle = "#33ff00";
+    ctx.fillStyle = "#38d1ff";
     ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
   };
   //method to get half width of the paddle
@@ -126,14 +126,15 @@ function Ball(pos, velocity, radius) {
     //fill out the circle
     ctx.fill();
     //draw the outline.
+    ctx.fillStyle = "#38d1ff";
+    ctx.strokeStyle = "#38d1ff";
     ctx.stroke();
-    ctx.fillStyle = "#33ff00";
-    ctx.strokeStyle = "#33ff00";
+    ctx.fill();
   };
 }
 
 //create a ball
-const ball = new Ball(vec2(150, 300), vec2(4, 4), 10);
+const ball = new Ball(vec2(150, 300), vec2(4, 4), 15);
 //create paddles on each sides
 const paddleLeft = new Paddle(vec2(0, 50), vec2(5, playerSpeed), 20, 100);
 //x-center should be width - 20 because it occupies 20 width of the canvas
