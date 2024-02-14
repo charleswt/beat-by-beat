@@ -5,8 +5,6 @@ const marginTop = 150;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-ctx.fillStyle = "#33ff00";
-ctx.strokeStyle = "#33ff00";
 
 const keyPressed = [];
 //up-arrow
@@ -38,14 +36,6 @@ function ballCollision(ball) {
   if (ball.pos.y + ball.radius <= marginTop) {
     ball.velocity.y *= -1;
   }
-  // //if the x coordinate of the bottom of the ball (the centerX + radius) touches the right wall, the ball bounces to the other direction
-  // if (ball.pos.x + ball.radius >= canvas.width) {
-  //   ball.velocity.x *= -1;
-  // }
-  // //if the ball touches the left wall, the ball bounces to the orhter direction.
-  // if (ball.pos.x + ball.radius <= 0) {
-  //   ball.velocity.x *= -1;
-  // }
 }
 
 //function to handle the paddle movement range
@@ -58,9 +48,7 @@ function paddleCollision(paddle) {
   if (paddle.pos.y + paddle.height >= canvas.height) {
     paddle.pos.y = canvas.height - paddle.height;
   }
-};
-
-
+}
 
 //function to create a ping-pong paddle
 function Paddle(pos, velocity, width, height) {
@@ -127,6 +115,8 @@ function Ball(pos, velocity, radius) {
     ctx.fill();
     //draw the outline.
     ctx.stroke();
+    ctx.fillStyle = "#33ff00";
+    ctx.strokeStyle = "#33ff00";
   };
 }
 
@@ -156,58 +146,54 @@ const paddleRight = new Paddle(
 );
 
 //function to respawn the ball
-function respawnBall(ball)  {
-  //if the ball was moving to the right side 
+function respawnBall(ball) {
+  //if the ball was moving to the right side
   if (ball.velocity.x > 0) {
     //respawn the ball at a new, random vertical position starting at 150px from the right wall.
     ball.pos.x = canvas.width - 150;
     //generating a randeom number between 0 and canvas.height - 200(margin top 100 + margin bottom 100 to avoid it to be too close to the top and bottom)
-    ball.pos.y = (Math.random() * (canvas.height - 200)) + marginTop;
+    ball.pos.y = Math.random() * (canvas.height - 200) + marginTop;
   }
 
   if (ball.velocity.x < 0) {
     ball.pos.x = 150;
-    ball.pos.y = (Math.random() * (canvas.height - 200)) + marginTop;
+    ball.pos.y = Math.random() * (canvas.height - 200) + marginTop;
   }
-  //change the direction of the ball when respawned 
+  //change the direction of the ball when respawned
   ball.velocity.x *= -1;
   ball.velocity.y *= -1;
 }
 
-//function to increase a score 
+//function to increase a score
 function increaseScore(ball, paddleLeft, paddleRight) {
-  //If the ball goes beyond the left boundary of the canvas 
-  if (ball.pos.x <= - ball.radius)  {
-    //update the playerRight score 
+  //If the ball goes beyond the left boundary of the canvas
+  if (ball.pos.x <= -ball.radius) {
+    //update the playerRight score
     paddleRight.score += 1;
-    document.getElementById('player2Score').innerHTML = paddleRight.score;
+    document.getElementById("player2Score").innerHTML = paddleRight.score;
     //respawn the ball
     respawnBall(ball);
-  };
+  }
 
   //if the ball goes beyond the right boundary of the canvas
   if (ball.pos.x >= canvas.width + ball.radius) {
     //update the playerLeft score
     paddleLeft.score += 1;
-    document.getElementById('player1Score').innerHTML = paddleLeft.score;
+    document.getElementById("player1Score").innerHTML = paddleLeft.score;
     //respawn the ball
     respawnBall(ball);
   }
 }
-
-
-
 
 //function to update the ball and paddles position
 function gameUpdate() {
   ball.update();
   paddleLeft.update();
   paddleCollision(paddleLeft);
-  //paddleRight.update();
   ballCollision(ball);
   ballPaddleCollision(ball, paddleLeft);
-  //player2AI(ball,paddleRight);
-  ballPaddleCollision(ball,paddleRight);
+  player2AI(ball, paddleRight);
+  ballPaddleCollision(ball, paddleRight);
   increaseScore(ball, paddleLeft, paddleRight);
 }
 
@@ -226,7 +212,7 @@ function player2AI(ball, paddle) {
     if (ball.pos.y > paddle.pos.y) {
       //move the paddle downside
       paddle.pos.y += paddle.velocity.y;
-      //make sure the paddle doesn't pass the canvas 
+      //make sure the paddle doesn't pass the canvas
       if (paddle.pos.y + paddle.height >= canvas.height) {
         paddle.pos.y = canvas.height - paddle.height;
       }
@@ -245,12 +231,15 @@ function player2AI(ball, paddle) {
 
 //function to update the ball's position to implement the animation loop
 function gameLoop() {
-  //clear out the canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //create a tail effect by set up the opacity to be 0.2
+  ctx.fillStyle = "rgba(0,0,0,0.2)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   //gameloop is called 60times/s
   window.requestAnimationFrame(gameLoop);
 
   gameUpdate();
   gameDraw();
 }
+
+
 gameLoop();

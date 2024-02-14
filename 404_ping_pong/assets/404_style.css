@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0
@@ -7,10 +8,9 @@ body {
     overflow: hidden
 }
 
-#canvas {
-    background-color: #111;
-}
-
+/*
+score style 
+*/
 h1 {
     color: white;
     font-family: sans-serif;
@@ -19,6 +19,7 @@ h1 {
     bottom: 100px;
 }
 
+/* score in the middle */
 #player1Score {
     left: 35%
 }
