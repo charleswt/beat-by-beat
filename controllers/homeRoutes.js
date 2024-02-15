@@ -5,7 +5,7 @@ router.get('/', async (req, res) => {
     // Get all projects and JOIN with user data
 
     // Pass serialized data and session flag into template
-    res.render('homepage');
+    res.render('game', {layout: 'error'});
   } catch (err) {
     res.status(500).json(err);
   }
