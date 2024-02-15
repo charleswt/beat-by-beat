@@ -25,7 +25,7 @@
     <!-- navbar -->
     <nav
       class="fixed inset-x-0 z-50 h-[50px] mt-0 px-4 py-4 flex justify-between items-center bg-gradient-to-r from-cyan-200 via-violet-600 to-blue-700">
-      <a class="text-3xl font-bold leading-none" href="#">
+      <a class="text-3xl font-bold leading-none" href="/">
         <i class="fa-solid fa-headphones" style="color: #000205;"></i>
       </a>
 
@@ -46,40 +46,41 @@
       <ul
         class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
         <li>
-          <a class="nav-text" href="./services.html">Home</a>
+          <a class="nav-text" href="/">Home</a>
         </li>
         <li class="text-gray-300">
         </li>
         <li>
-          <a class="nav-text" href="./services.html">About Us</a>
+          <a class="nav-text" href="/about">About Us</a>
         </li>
         <li class="text-gray-300">
         </li>
         <li>
-          <a class="nav-text" href="./services.html">Services</a>
+          <a class="nav-text" href="/services">Services</a>
         </li>
         <li class="text-gray-300">
         </li>
         <li>
-          <a class="nav-text" href="./services.html">Pricing</a>
+          <a class="nav-text" href="/pricing">Pricing</a>
         </li>
         <li class="text-gray-300">
         </li>
         <li>
-          <a class="nav-text" href="./services.html">Contact</a>
+          <a class="nav-text" href="/contact">Contact</a>
         </li>
       </ul>
         <!-- sign in/sign out btns -->
-      <a
-        class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-playpen font-bold rounded-xl transition duration-200"
-        href="#"
-        >Sign In</a
-      >
-      <a
-        class="hidden lg:inline-block py-2 px-6 bg-gradient hover:bg-blue-600 text-sm font-playpen text-white font-bold rounded-xl transition duration-200"
-        href="#"
-        >Sign up</a
-      >
+        {{#if logged_in}}
+        <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-playpen font-bold rounded-xl transition duration-200"
+        href="/logout"
+        >Log Out</a>
+      
+        {{else}}
+        <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-playpen font-bold rounded-xl transition duration-200"
+        href="/login"
+        >Login</a>
+        
+        {{/if}}
     </nav>
     <!--headphones icon  -->
     <div class="navbar-menu relative z-50 hidden">
@@ -95,50 +96,54 @@
           <ul>
             <li class="mb-1">
               <a class="block p-4 text-lg font-playpen text-purple-800 hover:bg-gradient hover:text-blue-600 rounded"
-                href="#home">Home</a>
+                href="/">Home</a>
             </li>
             <li class="mb-1">
               <a class="block hamburger-menu-text-and-bg"
-                href="#">About Us</a>
+                href="/about">About Us</a>
             </li>
             <li class="mb-1">
               <a class="block hamburger-menu-text-and-bg" 
-               href="#">Services</a>
+               href="/services">Services</a>
             </li>
             <li class="mb-1">
               <a class="block hamburger-menu-text-and-bg"
-                href="./services.html">Pricing</a>
+                href="./pricing">Pricing</a>
             </li>
             <li class="mb-1">
               <a class="block hamburger-menu-text-and-bg"
-                href="./services.html">Contact</a>
+                href="/contact">Contact</a>
             </li>
           </ul>
         </div>
         <div class="mt-auto">
           <div class="pt-6">
+            {{#if logged_in}}<a
+              class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-gradient hover:bg-blue-700 rounded-xl"
+              href="/logout">Log Out</a>
+          </div>
+          {{else}}
             <a
               class="block px-4 py-3 mb-3 leading-loose text-sm font- playpen text-center font-semibold  bg-gray-50 hover:bg-gradient rounded-xl"
-              href="#">Sign in</a>
-            <a
-              class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-gradient hover:bg-blue-700 rounded-xl"
-              href="#" >Sign Up</a>
-          </div>
+              href="/login">Login</a>
+          {{/if}}
            <!--hamburger menu footer -->
           <p class="my-4 text-xs text-center text-gray-400">
             <span>Copyright © 2023</span>
           </p>
+          
         </div>
       </nav>
     </div>
     <!-- END OF NAVBAR  -->
 
-    {{!-- Handlebars Templates --}}
+    {{!-- Handlebars Templates --}}]
+
+
     {{{ body }}}
     
-    
+  
     <!-- footer-->
-
     <footer>
 
     <div class="footer container"></div>
@@ -167,6 +172,6 @@
 </div>
 </footer> 
 
- <script src="/public/js/script.js"></script>
+ <script src="/js/script.js"></script>
   </body>
 </html>

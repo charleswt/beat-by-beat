@@ -11,4 +11,18 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/login', async (req, res) => {
+  try{
+    if (req.session.logged_in) {
+      res.redirect('/profile');
+      return;
+  }
+  } catch(err){
+    res.status(500).json({ message: 'Could not GET login.handlebars'})
+  }
+  
+
+  res.render('login');
+});
+
 module.exports = router;
