@@ -14,6 +14,8 @@ router.get('/', userAuth, async (req, res) => {
   }
 });
 
+router.get('/signup', )
+
 router.get('/logout', async (req,res) => {
   try {
     return req.session.logged_in = false;
@@ -25,15 +27,13 @@ router.get('/logout', async (req,res) => {
 router.get('/login', async (req, res) => {
   try{
     if (req.session.logged_in) {
-      res.redirect('/profile');
+      res.render('/profile');
       return;
   }
+    res.render('login')
   } catch(err){
     res.status(500).json({ message: 'Could not GET login.handlebars'})
   }
-  
-
-  res.render('login');
 });
 
 module.exports = router;
