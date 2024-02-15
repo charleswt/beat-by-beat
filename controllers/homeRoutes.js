@@ -1,15 +1,26 @@
 const router = require('express').Router();
+const userAuth = require('../utils/authentication')
 
-router.get('/', async (req, res) => {
+router.get('/', userAuth, async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
-
-    // Pass serialized data and session flag into template
-    res.render('game', {layout: 'error'});
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] },
+      order: [['name', 'ASC']],
+    });
+    res.render('homepage');
   } catch (err) {
     res.status(500).json(err);
+    res.render('game', {layout: 'error'});
   }
 });
+
+router.get('/logout', async (req,res) => {
+  try {
+    return req.session.logged_in = false;
+  } catch(err){
+    res.status(500).json({ message: 'Could not GET /logout'})
+  }
+})
 
 router.get('/login', async (req, res) => {
   try{
