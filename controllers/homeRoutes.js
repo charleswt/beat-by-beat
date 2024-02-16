@@ -14,6 +14,14 @@ router.get('/', userAuth, async (req, res) => {
   }
 });
 
+router.get('/dashboard', userAuth, async (req,res) => {
+  try{
+    res.render('dashboard');
+  } catch(err){
+    res.render({ layout: 'game' }).status(500).json({ message: 'Could not GET signup.handlebars'})
+  }
+})
+
 router.get('/signup', (req,res) => {
   try{
     res.render('signup')
