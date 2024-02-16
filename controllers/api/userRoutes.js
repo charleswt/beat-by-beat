@@ -2,17 +2,19 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
+
   try {
     const userData = await User.create(req.body);
 
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-
-      res.status(200).json(userData);
+      res.json({message: "logged in"});
     });
+    //res.redirect('/');
+    //res.render('homepage', { logged_in: req.session.logged_in});
   } catch (err) {
-    res.render('error', { layout: 'game' }).status(400).json(err);
+    res.render('game', { layout: 'error' });
   }
 });
 
@@ -44,7 +46,7 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (err) {
-    res.render('error', { layout: 'game' }).status(400).json(err);
+    res.render('game', { layout: 'error' }).status(400).json(err);
   }
 });
 
@@ -54,7 +56,7 @@ router.post('/logout', (req, res) => {
       res.status(204).end();
     });
   } else {
-    res.render('error', { layout: 'game' }).status(404).end();
+    res.render('game', { layout: 'error' })
   }
 });
 

@@ -42,15 +42,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //Code For Api requests from AudioDB and MusicBrainz
 //Add an event listener to the Search Artist button
-document.getElementById("searchButton").addEventListener("click", searchArtist);
+//document.getElementById("searchButton").addEventListener("click", searchArtist);
 
 //Add a keydown event listener to the input field
-document.getElementById("audioDbSearch").addEventListener("keydown", function(event) {
-    //Check if the pressed key is Enter
-    if (event.key === "Enter") {
-        searchArtist();
-    }
-});
+// document.getElementById("audioDbSearch").addEventListener("keydown", function(event) {
+//     //Check if the pressed key is Enter
+//     if (event.key === "Enter") {
+//         searchArtist();
+//     }
+// });
 
 //Your API key for theaudiodb.com
 //Function to search for an artist
