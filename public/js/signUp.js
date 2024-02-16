@@ -6,6 +6,7 @@ const signupFormHandler = async (event) => {
   const password = document.querySelector("#password-signup").value.trim();
   const email = document.querySelector("#email-signup").value.trim();
   const errorMsg = document.querySelector("#signup-error");
+  const pswErr = document.querySelector("#password-error");
   //send a post request to the ending api/users to crate a new userdata
   errorMsg.textContent="";
   if (name && password) {
@@ -27,7 +28,11 @@ const signupFormHandler = async (event) => {
       document.location.replace("/");
     } else {
       const result = await response.json();
-      errorMsg.textContent = result.message;
+      if (result.message == "Email already in use, please choose another."){
+        errorMsg.textContent = result.message;
+      } else {
+        pswErr.textContent = result.message;
+      }
     }
   }
 };

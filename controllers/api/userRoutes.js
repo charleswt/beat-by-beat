@@ -19,7 +19,13 @@ router.post('/', async (req, res) => {
       const isEmail = err.errors[0].path === 'email';
       //if isEmail, send a message 
       res.status(409).json({ message: isEmail ? 'Email already in use, please choose another.' : 'Username already taken, please choose another.' });
-    } else {
+    } else if (err.name === 'SequelizeValidationError') {
+      // Find out if the error is related to the password field
+      const isPasswordError = err.errors.some(error => error.path === 'password');
+      if (isPasswordError) {
+        return res.status(400).json({ message: 'Password needs to be at least 8 character' });
+      } 
+    }else {
       res.render('game', { layout: 'error' });
     }
   }
