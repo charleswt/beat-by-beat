@@ -1414,3 +1414,14 @@ adding gradient to carousel and hover effect */
 
   z-index: 2;
 }
+/* btn hover effect */
+.btn-menu-text-and-bg {
+  border-radius: 0.25rem;
+  padding: 1rem;
+  font-family: Playpen Sans, cursive;
+  background-color: #0f0f0f;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(107 33 168 / var(--tw-text-opacity));
+}
