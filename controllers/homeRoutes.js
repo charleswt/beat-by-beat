@@ -43,7 +43,7 @@ router.get('/login', async (req, res) => {
 });
 
 router.get('/contact', (req, res) => {
-  res.render('contact', {layout: 'contactLayout'});
+  res.render('contact', {layout: 'main'});
 })
 
 module.exports = router;
