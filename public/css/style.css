@@ -86,3 +86,7 @@ footer {
 .footerBottom p {
   color: white;
 }
+
+.error-message {
+  color: red;
+}

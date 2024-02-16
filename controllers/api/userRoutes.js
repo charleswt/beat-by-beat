@@ -11,10 +11,17 @@ router.post('/', async (req, res) => {
       req.session.logged_in = true;
       res.json({message: "logged in"});
     });
-    //res.redirect('/');
-    //res.render('homepage', { logged_in: req.session.logged_in});
+    
   } catch (err) {
-    res.render('game', { layout: 'error' });
+    //if the error involves a unique constraint violation,
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      //check if the error occurs at the email field
+      const isEmail = err.errors[0].path === 'email';
+      //if isEmail, send a message 
+      res.status(409).json({ message: isEmail ? 'Email already in use, please choose another.' : 'Username already taken, please choose another.' });
+    } else {
+      res.render('game', { layout: 'error' });
+    }
   }
 });
 
