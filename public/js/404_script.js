@@ -1,4 +1,7 @@
-//create a 2D canvas
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialization code that depends on DOM elements
+  //create a 2D canvas
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const marginTop = 150;
@@ -200,7 +203,7 @@ function increaseScore(ball, paddleLeft, paddleRight) {
   if (ball.pos.x <= -ball.radius) {
     //update the playerRight score
     paddleRight.score += 1;
-    document.getElementById("player2Score").innerHTML = paddleRight.score;
+    document.getElementById("player2Score").textContent = paddleRight.score;
     //respawn the ball
     respawnBall(ball);
   }
@@ -209,7 +212,7 @@ function increaseScore(ball, paddleLeft, paddleRight) {
   if (ball.pos.x >= canvas.width + ball.radius) {
     //update the playerLeft score
     paddleLeft.score += 1;
-    document.getElementById("player1Score").innerHTML = paddleLeft.score;
+    document.getElementById("player1Score").textContent = paddleLeft.score;
     //respawn the ball
     respawnBall(ball);
   }
@@ -261,3 +264,5 @@ function gameLoop() {
 }
 
 gameLoop();
+
+});
