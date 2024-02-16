@@ -44,7 +44,7 @@ router.get('/login', async (req, res) => {
       res.render('/profile');
       return;
   }
-    res.render('login');
+    res.render('login')
   } catch(err){
     res.render({ layout: 'game' }).status(500).json({ message: 'Could not GET login.handlebars'})
   }
