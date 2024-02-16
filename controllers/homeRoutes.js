@@ -7,14 +7,20 @@ router.get('/', userAuth, async (req, res) => {
       attributes: { exclude: ['password'] },
       order: [['name', 'ASC']],
     });
-    res.render('homepage');
+    res.render('homepage', userData);
   } catch (err) {
     res.status(500).json(err);
     res.render('game', {layout: 'error'});
   }
 });
 
-router.get('/signup', )
+router.get('/signup', (req,res) => {
+  try{
+    res.render('signup')
+  } catch(err){
+    res.status(500).json({ message: 'Could not GET signup.handlebars'})
+  }
+})
 
 router.get('/logout', async (req,res) => {
   try {
