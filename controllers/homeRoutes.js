@@ -29,7 +29,13 @@ router.get('/logout', async (req,res) => {
     res.render('error', { layout: 'game' }).status(500).json({ message: 'Could not GET /logout'})
   }
 })
-
+router.get('/aboutus', (req,res) => {
+  try{
+    res.render('aboutus')
+  } catch(err){
+    res.render('error', { layout: 'game' }).status(500).json({ message: 'Could not GET signup.handlebars'})
+  }
+})
 router.get('/login', async (req, res) => {
   try{
     if (req.session.logged_in) {
