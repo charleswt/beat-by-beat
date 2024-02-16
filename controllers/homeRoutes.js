@@ -42,4 +42,8 @@ router.get('/login', async (req, res) => {
   }
 });
 
+router.get('/contact', (req, res) => {
+  res.render('contact', {layout: 'contactLayout'});
+})
+
 module.exports = router;
