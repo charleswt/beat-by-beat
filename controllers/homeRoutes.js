@@ -41,7 +41,7 @@ router.get('/aboutus', (req,res) => {
   try{
     res.render('aboutus')
   } catch(err){
-    res.render({ layout: 'error' }).status(500).json({ message: 'Could not GET signup.handlebars'})
+    res.render({ layout: 'error' }).status(500).json({ message: 'Could not GET aboutus.handlebars'})
   }
 })
 router.get('/login', async (req, res) => {
@@ -57,7 +57,11 @@ router.get('/login', async (req, res) => {
 });
 
 router.get('/contact', (req, res) => {
+  try{
   res.render('contact', {layout: 'main'});
+  } catch(err){
+    res.render({ layout: 'error' }).status(500).json({ message: 'Could not GET aboutus.handlebars'})
+  }
 })
 
 module.exports = router;
