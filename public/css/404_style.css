@@ -3,14 +3,10 @@
   padding: 0;
 }
 
-body {
-  overflow: hidden;
-}
-
 /*
 score style 
 */
-h1 {
+.h1styler {
   color: white;
   font-family: sans-serif;
   font-size: 4rem;
@@ -31,7 +27,7 @@ h1 {
 }
 
 
-p {
+.styler {
   margin-top: 0;
   font-size: 80px;
   text-align: center;

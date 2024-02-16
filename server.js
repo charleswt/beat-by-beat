@@ -6,7 +6,7 @@ const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 const fetch = require('node-fetch');
 const crypto = require('crypto');
-
+require('dotenv').config()
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
