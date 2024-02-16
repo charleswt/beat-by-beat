@@ -18,7 +18,8 @@ router.get('/signup', (req,res) => {
   try{
     res.render('signup')
   } catch(err){
-    res.status(500).json({ message: 'Could not GET signup.handlebars'})
+    res.status(404).json({ message: 'Could not GET signup.handlebars'});
+    res.render('game', {layout: 'error'});
   }
 })
 
@@ -38,7 +39,8 @@ router.get('/login', async (req, res) => {
   }
     res.render('login')
   } catch(err){
-    res.status(500).json({ message: 'Could not GET login.handlebars'})
+    res.status(404).json({ message: 'Could not GET login.handlebars'});
+    res.render('game', {layout: 'error'});
   }
 });
 
