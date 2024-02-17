@@ -7,8 +7,9 @@ const signupFormHandler = async (event) => {
   const email = document.querySelector("#email-signup").value.trim();
   const errorMsg = document.querySelector("#signup-error");
   const pswErr = document.querySelector("#password-error");
-  //send a post request to the ending api/users to crate a new userdata
   errorMsg.textContent="";
+  pswErr.textContent="";
+    //send a post request to the ending api/users to crate a new userdata
   if (name && password) {
     const response = await fetch("/api/users", {
       method: "POST",
