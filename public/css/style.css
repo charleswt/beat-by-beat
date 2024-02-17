@@ -125,5 +125,8 @@ footer {
 .contact-info li {
   margin-bottom: 5px;
 }
+.error-message {
+  color: red;
+}
 
 /* Contact Styles*/

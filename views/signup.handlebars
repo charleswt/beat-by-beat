@@ -1,47 +1,41 @@
-<!-- register form  -->
-  <main class="max-w-screen-md max-h-screen-md items-center justify-center">
-      <div
-      class="shadow-xl rounded-xl px-8 py-2 sm:px-12 mt-4 bg-gradient"
-      >
-      <h1
-      class="text-[35px] font-bold text-gradient py-3">
-      Sign Up
-     </h1>
-        <!-- email input -->
-        <div class="py-6">
-            <h2
-            class="text-[25px] font-playpen font-bold text-gradient text-left py-2 pt-6">
-            Username
-          </h2>
-          <input
-            type="username"
-            placeholder="Enter Username"
-            class="border-b-2 w-full border-gray-200 py-3 px-7"
-          />
-            <!-- email input -->
-        <div class="py-6">
-            <h2
-            class=" text-[25px] font-playpen font-bold text-gradient text-left py-2">
-            Email 
-          </h2>
-    
-          <input
-            type="text"
-            placeholder="Enter email"
-            class="border-b-2 w-full border-gray-200 py-3 px-7 "
-          />
-          <!-- password input -->
-          <h2
-            class="text-[25px] font-playpen font-bold text-gradient text-left py-2 pt-6">
-            Password
-          </h2>
-    
-          <input
-            type="text"
-            placeholder="Enter password"
-            class="border-b-2 w-full border-gray-200 py-3 px-7"
-          />
-
+<main class="max-w-screen-md max-h-screen-md items-center justify-center">
+  <div class="shadow-xl rounded-xl px-8 py-2 sm:px-12 mt-4 bg-gradient">
+    <h1 class="text-[35px] font-bold text-gradient py-3">Sign Up</h1>
+    <form class="signup-form"> 
+      <!-- username input -->
+      <div class="py-6">
+        <h2 class="text-[25px] font-playpen font-bold text-gradient text-left py-2">Username</h2>
+        <input
+          id="name-signup" 
+          type="text" 
+          placeholder="Enter Username"
+          autocomplete="username"
+          class="border-b-2 w-full border-gray-200 py-3 px-7"
+        />
+      </div>
+      <!-- email input -->
+      <div class="py-6">
+        <h2 class="text-[25px] font-playpen font-bold text-gradient text-left py-2">Email</h2>
+        <input
+          id="email-signup"
+          type="email" 
+          placeholder="Enter email"
+          autocomplete="email"
+          class="border-b-2 w-full border-gray-200 py-3 px-7"
+        />
+        <div id="signup-error" class="error-message font-playpen"></div>
+      </div>
+      <!-- password input -->
+      <div class="py-6">
+        <h2 class="text-[25px] font-playpen font-bold text-gradient text-left py-2">Password</h2>
+        <input
+          id="password-signup"
+          type="password"
+          placeholder="Enter password"
+          autocomplete="new-password"
+          class="border-b-2 w-full border-gray-200 py-3 px-7"
+        />
+        <div id="password-error" class="error-message font-playpen"></div>
           <!--sign in button -->
           <div class="text-center py-6">
            <button type="button" class="mt-4 
@@ -53,3 +47,4 @@
           
     </div>
  </main>
+ <script src="/js/signUp.js"></script>

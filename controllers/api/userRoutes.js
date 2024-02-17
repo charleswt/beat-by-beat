@@ -2,17 +2,32 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
+
   try {
     const userData = await User.create(req.body);
 
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-
-      res.status(200).json(userData);
+      res.json({message: "logged in"});
     });
+    
   } catch (err) {
-    res.render({ layout: 'game' }).status(400).json(err);
+    //if the error involves a unique constraint violation,
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      //check if the error occurs at the email field
+      const isEmail = err.errors[0].path === 'email';
+      //if isEmail, send a message 
+      res.status(409).json({ message: isEmail ? 'Email already in use, please choose another.' : 'Username already taken, please choose another.' });
+    } else if (err.name === 'SequelizeValidationError') {
+      // Find out if the error is related to the password field
+      const isPasswordError = err.errors.some(error => error.path === 'password');
+      if (isPasswordError) {
+        return res.status(400).json({ message: 'Password needs to be at least 8 character' });
+      } 
+    }else {
+      res.render('game', { layout: 'error' });
+    }
   }
 });
 
@@ -44,7 +59,7 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (err) {
-    res.render({ layout: 'game' }).status(400).json(err);
+    res.render('game', { layout: 'error' }).status(400).json(err);
   }
 });
 
@@ -54,7 +69,7 @@ router.post('/logout', (req, res) => {
       res.status(204).end();
     });
   } else {
-    res.render({ layout: 'game' }).status(404).end();
+    res.render('game', { layout: 'error' })
   }
 });
 
