@@ -5,11 +5,14 @@ const signupFormHandler = async (event) => {
   const name = document.querySelector("#name-signup").value.trim();
   const password = document.querySelector("#password-signup").value.trim();
   const email = document.querySelector("#email-signup").value.trim();
-  const errorMsg = document.querySelector("#signup-error");
+  const emailErr = document.querySelector("#email-error");
   const pswErr = document.querySelector("#password-error");
-  errorMsg.textContent="";
-  pswErr.textContent="";
-    //send a post request to the ending api/users to crate a new userdata
+  const userErr = document.querySelector("#user-error");
+  emailErr.textContent = "";
+  pswErr.textContent = "";
+  userErr.textContent = "";
+
+  //send a post request to the ending api/users to crate a new userdata
   if (name && password) {
     const response = await fetch("/api/users", {
       method: "POST",
@@ -29,13 +32,18 @@ const signupFormHandler = async (event) => {
       document.location.replace("/");
     } else {
       const result = await response.json();
-      if (result.message == "Email already in use, please choose another."){
-        errorMsg.textContent = result.message;
-      } else {
+      console.log(result);
+      if (result.message == "Email already in use, please choose another.") {
+        emailErr.textContent = result.message;
+      } else if (
+        result.message == "Password needs to be at least 8 character"
+      ) {
         pswErr.textContent = result.message;
-      }
-    }
-  }
+      } else {
+        userErr.textContent = result.message;
+      };
+    };
+  };
 };
 
 document
