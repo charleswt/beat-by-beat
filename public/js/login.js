@@ -1,8 +1,8 @@
 const loginHandler = async (event) => {
     event.preventDeault();
 
-    const usernameOrEmail = document.querySelector('.usernameOrEmail').ariaValueMax.trim();
-    const pass = document.querySelector('.password').ariaValueMax.trim();
+    const usernameOrEmail = document.querySelector('.usernameOrEmail').value.trim();
+    const pass = document.querySelector('.password').value.trim();
 
     if (usernameOrEmail && passowrd){
 
@@ -19,4 +19,4 @@ const loginHandler = async (event) => {
     }
 };
 
-document.querySelector('.submit-signin').addEventListener('submit', loginHandler)
+document.querySelector('.submit-signin').addEventListener('submit', loginHandler);
