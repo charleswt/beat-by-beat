@@ -1,0 +1,13 @@
+<div class="canvas-container">
+  <canvas id="canvas"></canvas>
+  <p class="inside-canvas styler">
+    {{#if (isEqual status 404)}}
+    NOT FOUND
+    {{else if (isEqual status 400)}}
+    BAD REQUEST
+    {{/if}}
+    <br /><span class="bigger flickering">{{status}}</span>
+    <h1 id="player1Score" class="h1styler">0</h1>
+    <h1 id="player2Score" class="h1styler">0</h1>
+  </p>
+</div>
