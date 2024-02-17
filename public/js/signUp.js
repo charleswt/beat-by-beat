@@ -13,7 +13,7 @@ const signupFormHandler = async (event) => {
   userErr.textContent = "";
 
   //send a post request to the ending api/users to crate a new userdata
-  if (name && password) {
+  if (name && email && password) {
     const response = await fetch("/api/users", {
       method: "POST",
       body: JSON.stringify({
