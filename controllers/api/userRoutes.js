@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ message: 'Password needs to be at least 8 character' });
       } 
     }else {
-      res.render('game', { layout: 'error' });
+      res.render({ layout: 'error' });
     }
   }
 });
@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (err) {
-    res.render('game', { layout: 'error' }).status(400).json(err);
+    res.render({ layout: 'error' }).status(400).json(err);
   }
 });
 
@@ -69,12 +69,9 @@ router.post('/logout', (req, res) => {
       res.status(204).end();
     });
   } else {
-    res.render('game', { layout: 'error' })
+    res.render({ layout: 'error' })
   }
 });
 
 
 module.exports = router;
-
-
-

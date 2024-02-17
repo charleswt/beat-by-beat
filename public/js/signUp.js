@@ -35,9 +35,7 @@ const signupFormHandler = async (event) => {
       console.log(result);
       if (result.message == "Email already in use, please choose another.") {
         emailErr.textContent = result.message;
-      } else if (
-        result.message == "Password needs to be at least 8 character"
-      ) {
+      } else if (result.message == "Password needs to be at least 8 character") {
         pswErr.textContent = result.message;
       } else {
         userErr.textContent = result.message;
