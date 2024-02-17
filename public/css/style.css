@@ -4,7 +4,7 @@
 
 @layer components {
   .bg-gradient {
-    @apply bg-gradient-to-r from-black via-violet-600 to-blue-700;
+    @apply bg-gradient-to-r from-#0f0f0f via-violet-600 to-blue-700;
   }
   .text-gradient {
     @apply font-playpen text-center bg-gradient-to-b from-yellow-50 to-blue-600 bg-clip-text text-transparent;
@@ -89,34 +89,32 @@ footer {
 
 /* Contact Styles*/
 .contact-info {
-  background-color: #3b3b3b94;
-  color: white;
-  padding: 20px;
+  background-color: #3b3b3b94; 
+  color: white; 
+  padding: 20px; 
   font-family: Arial, sans-serif;
 }
 
-.contact-info h1,
-.contact-info h2 {
+.contact-info h1, .contact-info h2 {
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 10px; 
 }
 
-.contact-info p,
-.contact-info ul {
+.contact-info p, .contact-info ul {
   margin-bottom: 20px;
 }
 
 .contact-info a {
-  color: white;
+  color: white; 
   text-decoration: none;
 }
 
 .contact-info a:hover {
-  text-decoration: underline;
+  text-decoration: underline; 
 }
 
 .contact-info .contact-method {
-  margin-bottom: 20px;
+  margin-bottom: 20px; 
 }
 
 .contact-info ul {
