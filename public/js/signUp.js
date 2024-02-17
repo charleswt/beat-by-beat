@@ -9,7 +9,7 @@ const signupFormHandler = async (event) => {
   const pswErr = document.querySelector("#password-error");
   //send a post request to the ending api/users to crate a new userdata
   errorMsg.textContent="";
-  if (name && password) {
+  if (name && email && password) {
     const response = await fetch("/api/users", {
       method: "POST",
       body: JSON.stringify({
