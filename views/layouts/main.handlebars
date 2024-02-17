@@ -68,16 +68,9 @@
       </ul>
         <!-- sign in/sign out btns -->
         {{#if logged_in}}
-        <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-playpen font-bold rounded-xl transition duration-200"
-        href="/logout"
+        <a id="logout" class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-playpen font-bold rounded-xl transition duration-200"
         >Log Out</a>
-      
-        {{else}}
-        <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-playpen font-bold rounded-xl transition duration-200"
-        href="/login"
-        >Login</a>
-        
-        {{/if}}
+       {{/if}}
     </nav>
     <!--headphones icon  -->
     <div class="navbar-menu relative z-50 hidden">
