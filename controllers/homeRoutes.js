@@ -15,7 +15,7 @@ router.get('/',authenticate, async (req, res) => {
   }
 });
 
-router.get('/dashboard', userAuth, async (req,res) => {
+router.get('/dashboard', authenticate, async (req,res) => {
   try{
     res.render('dashboard');
   } catch(err){
