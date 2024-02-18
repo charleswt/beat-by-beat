@@ -147,3 +147,35 @@ footer {
   padding-right: 40px;
   padding-left: 40px;
 }
+
+.main-form {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 30px;
+}
+/* new hover btns */
+.btn-hover {
+  margin-top: 1rem;
+  transition: transform 0.3s ease-in-out 0.15s,
+    background-color 0.3s ease-in-out;
+  background-image: linear-gradient(to right, #ffd700, #ff8c00);
+  cursor: pointer;
+}
+
+.btn-hover:hover {
+  transform: translateY(-1px) scale(1.2);
+  background-image: linear-gradient(to right, #ffd700, #ff8c00);
+  transition-duration: 0.5s;
+}
+
+.btn-hover .w-auto {
+  width: auto; /* Equivalent to w-auto */
+}
+.rounded-btn {
+  border-radius: 9999px;
+  height: 30px;
+  width: 100px;
+}
