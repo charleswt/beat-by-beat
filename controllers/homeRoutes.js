@@ -57,12 +57,4 @@ router.get('/login', async (req, res) => {
   }
 });
 
-router.get('/contact', (req, res) => {
-  try{
-  res.render('contact', {layout: 'main'});
-  } catch(err){
-    res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET aboutus.handlebars'})
-  }
-})
-
 module.exports = router;
