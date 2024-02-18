@@ -1,16 +1,16 @@
 <!-- login form  -->
-  <main class="max-w-screen-md gap-5 items-center justify-center">
+  <main class="main-form w-full">
       <div
-        class="shadow-xl rounded-xl px-8 py-2 sm:px-12 mt-4 bg-gradient"
+        class="shadow-xl rounded-xl px-8 py-2 sm:px-12 mt-4 bg-gradient w-full"
       >
      <h1
-      class="text-[35px] font-bold text-gradient font-playpen py-3">
+      class="text-[35px] font-bold new-text-gradient font-playpen py-3">
       Login
       </h1>
         <!-- email input -->
         <div class="py-6">
             <h2
-            class="usernameOrEmail text-[25px] font-playpen font-bold text-gradient text-left py-2">
+            class="usernameOrEmail text-[25px] font-playpen font-bold new-text-gradient text-left py-2">
             Username or Email
           </h2>
           <input
@@ -20,7 +20,7 @@
           />
           <!-- password input -->
           <h2
-            class="password text-[25px] font-playpen font-bold text-gradient text-left py-2 pt-6">
+            class="password text-[25px] font-playpen font-bold new-text-gradient text-left py-2 pt-6">
             Password
           </h2>
           <input
@@ -38,13 +38,15 @@
             font-playpen text-[20px] text-white pr-2 pl-2 rounded-full w-auto">Sign in</button>
           </div> 
           <!--register button  -->
+  
           <div class="text-center">
-            <p class="text-[20px] font-playpen font-bold text-gradient text-center py-6">Not a member?</p>
-           <a href="/signup"> <button type="button" class="mt-4 
-            transition ease-in-out delay-150 bg-gradient 
-            hover:-translate-y-1 hover:scale-110 
-            hover:bg-gradient duration-300
-            font-playpen text-[20px] text-white pr-2 pl-2 rounded-full w-auto">Sign Up</button></a>
+            <p class="text-[20px] font-playpen font-bold new-text-gradient text-center py-6">Not a member?</p>
+
+            {{!-btn-sign up  --}}
+           <a href="/signup"> <button type="button" class="mt-4 rounded-btn
+            btn-hover btn-hover:hover 
+            font-playpen text-[20px] text-white pr-2 pl-2  w-auto">Sign Up</button></a>
         </div> 
     </div>
  </main>
+ 
