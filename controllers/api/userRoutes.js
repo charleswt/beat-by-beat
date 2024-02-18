@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const { Op } = require('sequelize');
 
 router.post('/', async (req, res) => {
 
@@ -33,15 +34,21 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({
+      where: {
+        [Op.or]: [
+          { email: req.body.email },
+          { name: req.body.email }
+        ]
+      }
+    });
 
     if (!userData) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: 'Incorrect email/username or password, please try again' });
       return;
     }
-
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
@@ -59,7 +66,7 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (err) {
-    res.render('game', { layout: 'error' }).status(400).json(err);
+   res.render('game', { layout: 'error' }).status(400).json(err);
   }
 });
 
