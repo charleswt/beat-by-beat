@@ -124,19 +124,7 @@ footer {
   margin-bottom: 20px;
 }
 
-.contact-info ul {
-  list-style-type: none;
-  padding: 0;
-}
 
-.contact-info li {
-  margin-bottom: 5px;
-}
-.error-message {
-  color: red;
-}
-
-/* Contact Styles*/
 
 .new-text-gradient {
   background: linear-gradient(to bottom, #93c5fd, #a5b4fc, #7e3af2);
