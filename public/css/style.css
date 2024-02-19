@@ -56,6 +56,13 @@ body {
   transition: 0.5s;
 }
 
+.footer-container {
+  margin-top: auto;
+  background-color: #000000;
+  color: white; 
+  padding: 20px; 
+  text-align: center;
+}
 
 .new-text-gradient {
   background: linear-gradient(to bottom, #93c5fd, #a5b4fc, #7e3af2);
