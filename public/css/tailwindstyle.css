@@ -915,6 +915,15 @@ body {
   margin: 0;
 }
 
+h1 {
+  font-size: 35px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 23px;
+}
+
 .social-icon {
   display: flex;
   justify-content: center;
@@ -954,6 +963,16 @@ body {
   text-align: center;
 }
 
+.form-container {
+  margin-top: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.align-center {
+  align-self: center;
+}
+
 .new-text-gradient {
   background: linear-gradient(to bottom, #93c5fd, #a5b4fc, #7e3af2);
   -webkit-background-clip: text;
@@ -964,13 +983,36 @@ body {
   padding-left: 40px;
 }
 
-.main-form {
-  display: flex;
-  gap: 1.25rem;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+.padding-top {
   padding-top: 30px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.form-divs {
+  text-align: center;
+}
+
+.form-text {
+  text-align: center;
+}
+
+.custom-h {
+  height: 40px;
+}
+
+.margin-b {
+  margin-bottom: 20px;
+}
+
+.margin-t {
+  margin-top: 20px;
 }
 
 /* new hover btns */
@@ -998,6 +1040,35 @@ body {
   border-radius: 9999px;
   height: 30px;
   width: 100px;
+}
+
+/* Equivalent to items-center and justify-center */
+
+.centered {
+  align-items: center;
+  justify-content: center;
+}
+
+.width-custom {
+  width: 500px;
+}
+
+/* max width and max height */
+
+/* Equivalent to max-w-screen-md */
+
+@media (max-width: 768px) {
+  .max-w-screen-md {
+    max-width: 100%;
+  }
+}
+
+/* Equivalent to max-h-screen-md */
+
+@media (max-height: 768px) {
+  .max-h-screen-md {
+    max-height: 100%;
+  }
 }
 
 .hover\:bg-gradient:hover {
