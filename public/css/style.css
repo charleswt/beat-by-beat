@@ -24,20 +24,12 @@
 /* DO  NOT TOUCH ABOVE CODE */
 body {
   background-color: #000;
-}
-h1 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
 }
 
-footer {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  background-color: black;
-}
-.footer-container {
-  width: 100%;
-  padding: 70px 30px 20px;
-}
 .social-icon {
   display: flex;
   justify-content: center;
@@ -63,33 +55,13 @@ footer {
   color: white;
   transition: 0.5s;
 }
-.footernav {
-  margin: 30px 0;
-}
-.footernav ul {
-  display: flex;
-  justify-content: center;
-}
-.footernav ul li a {
-  color: white;
-  margin: 20px;
-  text-decoration: none;
-  font-size: 1.3em;
-  opacity: 0.7;
-  transition: 0.5s;
-}
 
-.footernav ul li a:hover {
-  opacity: 1;
-}
-
-.footerBottom {
-  background-color: #000;
-  padding: 20px;
+.footer-container {
+  margin-top: auto;
+  background-color: #000000;
+  color: white; 
+  padding: 20px; 
   text-align: center;
-}
-.footerBottom p {
-  color: white;
 }
 
 .new-text-gradient {
