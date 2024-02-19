@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { User, Friends } = require('../models');
 const authenticate = require('../utils/authentication.js');
 
 router.get('/', authenticate, async (req, res) => {
@@ -17,7 +18,15 @@ router.get('/', authenticate, async (req, res) => {
 
 router.get('/dashboard', authenticate, async (req,res) => {
   try{
-    res.render('dashboard', {logged_in: req.session.logged_in});
+    const userData = await User.viewAll({ 
+      include: [
+        {
+      model: Friends,
+      attributes: ['name', 'savedSongs']
+    }
+  ]
+})
+    res.render('dashboard', userData, {logged_in: req.session.logged_in});
   } catch(err){
     res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET signup.handlebars'})
   }
