@@ -911,21 +911,6 @@ body {
   background-color: #000;
 }
 
-h1 {
-}
-
-footer {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  background-color: black;
-}
-
-.footer-container {
-  width: 100%;
-  padding: 70px 30px 20px;
-}
-
 .social-icon {
   display: flex;
   justify-content: center;
@@ -956,86 +941,6 @@ footer {
   color: white;
   transition: 0.5s;
 }
-
-.footernav {
-  margin: 30px 0;
-}
-
-.footernav ul {
-  display: flex;
-  justify-content: center;
-}
-
-.footernav ul li a {
-  color: white;
-  margin: 20px;
-  text-decoration: none;
-  font-size: 1.3em;
-  opacity: 0.7;
-  transition: 0.5s;
-}
-
-.footernav ul li a:hover {
-  opacity: 1;
-}
-
-.footerBottom {
-  background-color: #000;
-  padding: 20px;
-  text-align: center;
-}
-
-.footerBottom p {
-  color: white;
-}
-
-/* Contact Styles*/
-
-.contact-info {
-  background-color: #3b3b3b94;
-  color: white;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.contact-info h1,
-.contact-info h2 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.contact-info p,
-.contact-info ul {
-  margin-bottom: 20px;
-}
-
-.contact-info a {
-  color: white;
-  text-decoration: none;
-}
-
-.contact-info a:hover {
-  text-decoration: underline;
-}
-
-.contact-info .contact-method {
-  margin-bottom: 20px;
-}
-
-.contact-info ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.contact-info li {
-  margin-bottom: 5px;
-}
-
-.error-message {
-  color: red;
-}
-
-/* Contact Styles*/
 
 .new-text-gradient {
   background: linear-gradient(to bottom, #93c5fd, #a5b4fc, #7e3af2);
