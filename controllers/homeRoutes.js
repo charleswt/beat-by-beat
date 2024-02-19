@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const authenticate = require('../utils/authentication.js');
 
-router.get('/',authenticate, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   console.log(`request${req.session}`)
    try {
   //   const userData = await User.findAll({
