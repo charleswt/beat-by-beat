@@ -21,15 +21,23 @@ router.get('/dashboard', authenticate, async (req,res) => {
   } catch(err){
     res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET signup.handlebars'})
   }
-})
+});
 
-router.get('/signup', (req,res) => {
+router.get('/profile', authenticate, (req,res) => {
+  try{
+    res.render('profile')
+  } catch(err){
+    res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET aboutus.handlebars'})
+  }
+});
+
+router.get('/signup', authenticate, (req,res) => {
   try{
     res.render('signup')
   } catch(err){
     res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET signup.handlebars'})
   }
-})
+});
 
 router.get('/logout', async (req,res) => {
   try {
@@ -37,14 +45,8 @@ router.get('/logout', async (req,res) => {
   } catch(err){
     res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET /logout'})
   }
-})
-router.get('/aboutus', (req,res) => {
-  try{
-    res.render('aboutus')
-  } catch(err){
-    res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET aboutus.handlebars'})
-  }
-})
+});
+
 router.get('/login', async (req, res) => {
   try{
     if (req.session.logged_in) {
@@ -56,13 +58,5 @@ router.get('/login', async (req, res) => {
     res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET login.handlebars'})
   }
 });
-
-router.get('/contact', (req, res) => {
-  try{
-  res.render('contact', {layout: 'main'});
-  } catch(err){
-    res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET aboutus.handlebars'})
-  }
-})
 
 module.exports = router;
