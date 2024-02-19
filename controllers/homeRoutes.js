@@ -17,7 +17,7 @@ router.get('/', authenticate, async (req, res) => {
 
 router.get('/dashboard', authenticate, async (req,res) => {
   try{
-    res.render('dashboard');
+    res.render('dashboard', {logged_in: req.session.logged_in});
   } catch(err){
     res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET signup.handlebars'})
   }
@@ -25,13 +25,13 @@ router.get('/dashboard', authenticate, async (req,res) => {
 
 router.get('/profile', authenticate, (req,res) => {
   try{
-    res.render('profile')
+    res.render('profile', {logged_in: req.session.logged_in})
   } catch(err){
     res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET aboutus.handlebars'})
   }
 });
 
-router.get('/signup', authenticate, (req,res) => {
+router.get('/signup', (req,res) => {
   try{
     res.render('signup')
   } catch(err){
