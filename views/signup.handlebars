@@ -1,40 +1,41 @@
-<main class="max-w-screen-md max-h-screen-md items-center justify-center">
+<main class="form-container margin-t">
   <div class="shadow-xl rounded-xl px-8 py-2 sm:px-12 mt-4 bg-gradient">
-    <h1 class="text-[35px] font-bold text-gradient py-3">Sign Up</h1>
+    <h1 class="font-bold font-playpen new-text-gradient py-3 text-center padding-top">Sign Up</h1>
+
     <form class="signup-form"> 
       <!-- username input -->
-      <div class="py-6">
-        <h2 class="text-[25px] font-playpen font-bold text-gradient text-left py-2">Username</h2>
+      <div class="py-6 form-divs">
+        <h2 class="font-playpen font-bold new-text-gradient py-2 form-text">Username</h2>
         <input
           id="name-signup" 
           type="text" 
           placeholder="Enter Username"
           autocomplete="username"
-          class="border-b-2 w-full border-gray-200 py-3 px-7"
+          class="border-b-2 width-custom border-gray-200 py-3 px-7"
         />
         <div id="user-error" class="error-message font-playpen"></div>
       </div>
       <!-- email input -->
-      <div class="py-6">
-        <h2 class="text-[25px] font-playpen font-bold text-gradient text-left py-2">Email</h2>
+      <div class="py-6 form-divs">
+        <h2 class="font-playpen font-bold new-text-gradient py-2 form-text">Email</h2>
         <input
           id="email-signup"
           type="email" 
           placeholder="Enter email"
           autocomplete="email"
-          class="border-b-2 w-full border-gray-200 py-3 px-7"
+          class="border-b-2 width-custom  border-gray-200 py-3 px-7"
         />
         <div id="email-error" class="error-message font-playpen"></div>
       </div>
       <!-- password input -->
-      <div class="py-6">
-        <h2 class="text-[25px] font-playpen font-bold text-gradient text-left py-2">Password</h2>
+      <div class="py-6 form-divs">
+        <h2 class="font-playpen font-bold new-text-gradient text-left py-2 form-text">Password</h2>
         <input
           id="password-signup"
           type="text"
           placeholder="Enter password"
           autocomplete="new-password"
-          class="border-b-2 w-full border-gray-200 py-3 px-7"
+          class="border-b-2 width-custom  border-gray-200 py-3 px-7"
         />
         <div id="password-error" class="error-message font-playpen"></div>
           <!--sign in button -->
@@ -45,7 +46,7 @@
             hover:bg-gradient duration-300
             font-playpen text-[20px] text-white pr-2 pl-2 rounded-full w-auto">Submit</button>
           </div> 
-          
+       </form>   
     </div>
  </main>
  <script src="/js/signUp.js"></script>
