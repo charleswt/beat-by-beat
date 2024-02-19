@@ -36,7 +36,7 @@ User.init(
         len: [8],
       },
     },
-    friends: {
+    friends_id: {
       type: DataTypes.STRING,
       referneces: {
         model: 'friends',
