@@ -5,6 +5,8 @@
     NOT FOUND
     {{else if (isEqual status 400)}}
     BAD REQUEST
+    {{else if (isEqual status 500)}}
+    INTERNAL SERVER ERROR
     {{/if}}
     <br /><span class="bigger flickering">{{status}}</span>
     <h1 id="player1Score" class="h1styler">0</h1>

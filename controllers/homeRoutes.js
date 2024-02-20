@@ -11,39 +11,61 @@ router.get('/',authenticate, async (req, res) => {
   //   const usersData = userData.map((user) => user.get({ plain: true}));
     res.render('homepage', {logged_in: req.session.logged_in});
   } catch (err) {
-    res.render('game', {layout: 'error'});
-  }
+    const statusCode = 500;
+      // Render your template and pass the status code as part of the data object
+      res.status(statusCode).render("game", {
+        layout: "error",
+        status: statusCode,
+  });
+}
 });
 
 router.get('/dashboard', authenticate, async (req,res) => {
   try{
     res.render('dashboard');
   } catch(err){
-    res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET signup.handlebars'})
-  }
-})
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
+});
 
 router.get('/signup', (req,res) => {
   try{
     res.render('signup')
   } catch(err){
-    res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET signup.handlebars'})
-  }
-})
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
+});
 
 router.get('/logout', async (req,res) => {
   try {
     return req.session.logged_in = false;
   } catch(err){
-    res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET /logout'})
-  }
-})
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
+});
+
 router.get('/aboutus', (req,res) => {
   try{
     res.render('aboutus')
   } catch(err){
-    res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET aboutus.handlebars'})
-  }
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
 })
 router.get('/login', async (req, res) => {
   try{
@@ -53,8 +75,12 @@ router.get('/login', async (req, res) => {
   }
     res.render('login')
   } catch(err){
-    res.render('game', { layout: 'error' }).status(500).json({ message: 'Could not GET login.handlebars'})
-  }
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
 });
 
 module.exports = router;
