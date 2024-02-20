@@ -64,7 +64,7 @@
       </ul>
         <!-- sign in/sign out btns -->
         {{#if logged_in}}
-        <a id="logout" class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 btn-hover btn-hover:hover nav-rounded-btn
+        <a class="logout hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 btn-hover btn-hover:hover nav-rounded-btn
         font-playpen"
         >Log Out</a>
        {{/if}}
@@ -97,9 +97,10 @@
         </div>
         <div class="mt-auto">
           <div class="pt-6">
-            {{#if logged_in}}<a
-              class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-gradient hover:bg-blue-700 rounded-xl"
-              href="/logout">Log Out</a>
+            {{#if logged_in}}
+            <a id="logout" class=" block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-gradient btn-hover btn-hover:hover
+        font-playpen rounded-xl"
+              >Log Out</a>
           </div>
           {{/if}}
            <!--hamburger menu footer -->
