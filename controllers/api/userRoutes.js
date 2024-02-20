@@ -27,8 +27,9 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ message: 'Password needs to be at least 8 character' });
       } 
     }else {
-      res.render('game', { layout: 'error' });
-    }
+      console.error(err);
+    res.status(500).render('error', { layout: 'error', message: 'Could not POST homepage' });
+  }
   }
 });
 
@@ -49,9 +50,10 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect email/username, please try again' });
       return;
     }
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = userData.checkPassword(req.body.password);
 
     if (!validPassword) {
+      console.log('Incorrect password, please try again')
       res
         .status(400)
         .json({ message: 'Incorrect password, please try again' });
@@ -66,8 +68,8 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (err) {
-   res.render('game', { layout: 'error' }).status(400).json(err);
-  }
+    console.error('Incorrect password, please try again');
+    res.status(500).render('error', { layout: 'error', message: 'Could not POST logout' });}
 });
 
 router.post('/logout', (req, res) => {
@@ -76,8 +78,8 @@ router.post('/logout', (req, res) => {
       res.status(204).end();
     });
   } else {
-    res.render('game', { layout: 'error' })
-  }
+    console.error(err);
+    res.status(500).render('error', { layout: 'error', message: 'Could not POST logout' });}
 });
 
 module.exports = router;

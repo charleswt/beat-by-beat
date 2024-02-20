@@ -36,13 +36,6 @@ User.init(
         len: [8],
       },
     },
-    friends_id: {
-      type: DataTypes.STRING,
-      referneces: {
-        model: 'friends',
-        key: 'id',
-      },
-    },
   },
   {
     hooks: {
