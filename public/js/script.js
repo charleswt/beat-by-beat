@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+
 //Code For Api requests from AudioDB and MusicBrainz
 //Add an event listener to the Search Artist button
 document.getElementById("searchButton").addEventListener("click", searchArtist);
@@ -52,23 +53,48 @@ document.getElementById("audioDbSearch").addEventListener("keydown", function(ev
     }
 });
 
+
+
 //Your API key for theaudiodb.com
 //Function to search for an artist
-function searchArtist() {
+// function searchArtist() {
+//   const artistName = document.getElementById("audioDbSearch").value;
+//   const serverUrl = `/searchArtist?artist=${encodeURIComponent(artistName)}`;
+
+//   fetch(serverUrl)
+//       .then((response) => response.json())
+//       .then((data) => {
+//           displayArtistInfo(data);
+//           fetchMusicVideos(data);
+//           getMusicBrainzData(data);
+//       })
+//       .catch((error) => {
+//           console.error("Error:", error);
+//       });
+// }
+
+// Function to search for an artist using async/await
+async function searchArtist() {
   const artistName = document.getElementById("audioDbSearch").value;
   const serverUrl = `/searchArtist?artist=${encodeURIComponent(artistName)}`;
 
-  fetch(serverUrl)
-      .then((response) => response.json())
-      .then((data) => {
-          displayArtistInfo(data);
-          fetchMusicVideos(data);
-          getMusicBrainzData(data);
-      })
-      .catch((error) => {
-          console.error("Error:", error);
-      });
+  try {
+    const response = await fetch(serverUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    displayArtistInfo(data);
+    await fetchMusicVideos(data); 
+    await getMusicBrainzData(data); 
+  } catch(err)  {
+    console.error('error:' , err);
+  }
 }
+
+
+
+
 
 
 //Function to display artist information
@@ -79,9 +105,9 @@ function displayArtistInfo(data) {
 
     if (data && data.artists) {
         const artist = data.artists[0];
-
         //Create an HTML template with the desired properties
         const artistInfoHTML = `
+            <i class='bx bx-bookmark-heart' id='bookmark' style='color:#f70707; font-size: 40px;'></i>
             <p><strong>Artist:</strong> ${artist.strArtist}</p>
             <p><strong>Birth Year:</strong> ${artist.intBornYear}</p>
             <p><strong>Gender:</strong> ${artist.strGender}</p>
@@ -94,28 +120,57 @@ function displayArtistInfo(data) {
 
         //Append the HTML to the resultsDiv
         resultsDiv.innerHTML = artistInfoHTML;
+        //Add an event listener to bookmark an artist
+        const bookmark = document.getElementById("bookmark").addEventListener("click", bookmarkHandler(bookmark));
     } else {
         resultsDiv.innerHTML = "No results found for the artist.";
     }
 }
 
-//Function to fetch music videos
-function fetchMusicVideos(data) {
+function bookmarkHandler(bm) {
+  console.log("bookmark");
+  bm.classList.add('bx-tada');
+  
+  setTimeout(function() {
+    bm.classList.remove('bx-tada', 'bx-bookmark-heart');
+    bm.classList.add('bxs-bookmark-heart');
+  }, 1000);
+}
+
+
+// //Function to fetch music videos
+// function fetchMusicVideos(data) {
+//   if (data && data.artists) {
+//     const artistId = data.artists[0].idArtist;
+
+//     const serverUrl = `/fetchMusicVideos?artistId=${encodeURIComponent(artistId)}`;
+
+//     fetch(serverUrl)
+//       .then((response) => response.json())
+//       .then((musicVideosData) => {
+//         displayMusicVideos(musicVideosData);
+//       })
+//       .catch((error) => {
+//         console.error("Error:", error);
+//       });
+//   }
+// }
+
+async function fetchMusicVideos(data) {
   if (data && data.artists) {
     const artistId = data.artists[0].idArtist;
-
     const serverUrl = `/fetchMusicVideos?artistId=${encodeURIComponent(artistId)}`;
-
-    fetch(serverUrl)
-      .then((response) => response.json())
-      .then((musicVideosData) => {
+    try {
+      const response = await fetch(serverUrl); 
+      if (response.ok) {
+        const musicVideosData = await response.json(); 
         displayMusicVideos(musicVideosData);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
-}
+};
 
 
 
@@ -161,8 +216,8 @@ function displayMusicVideos(musicVideosData) {
             }
         }
         // copy albums to create infinite loop effect
-        var copy = document.querySelector('.slide-track').copyNode(true);
-        document.querySelector('.slider').appendChild(copy);
+        var copy = document.querySelector('#slide-track').copyNode(true);
+        document.querySelector('#slider').appendChild(copy);
     } else {
         console.log('No music videos found for this artist.');
     }
@@ -177,25 +232,49 @@ function getYouTubeVideoId(url) {
 }
 
 
-//Function to grab more Artisit data from Musicbrainz APi by using MBID thats given from the audioDb request in the artist object
-function getMusicBrainzData(data) {
+// //Function to grab more Artisit data from Musicbrainz APi by using MBID thats given from the audioDb request in the artist object
+// function getMusicBrainzData(data) {
+//   if (data && data.artists) {
+//     const mbId = data.artists[0].strMusicBrainzID;
+
+//     const serverUrl = `/getMusicBrainzData?mbId=${encodeURIComponent(mbId)}`;
+
+//     fetch(serverUrl)
+//       .then((response) => response.json())
+//       .then((musicBrainzData) => {
+//         displayMusicBrainzData(musicBrainzData);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching from MusicBrainz:", error);
+//       });
+//   } else {
+//     console.error("No artist data available to retrieve MusicBrainz ID.");
+//   }
+// }
+
+async function getMusicBrainzData(data) {
   if (data && data.artists) {
     const mbId = data.artists[0].strMusicBrainzID;
-
     const serverUrl = `/getMusicBrainzData?mbId=${encodeURIComponent(mbId)}`;
 
-    fetch(serverUrl)
-      .then((response) => response.json())
-      .then((musicBrainzData) => {
-        displayMusicBrainzData(musicBrainzData);
-      })
-      .catch((error) => {
-        console.error("Error fetching from MusicBrainz:", error);
-      });
+    try {
+      const response = await fetch(serverUrl);
+      if (!response.ok) {
+        // This will catch any HTTP errors, such as 404 or 500 status codes.
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const musicBrainzData = await response.json();
+      displayMusicBrainzData(musicBrainzData);
+    } catch (error) {
+      console.error("Error fetching from MusicBrainz:", error);
+    }
   } else {
     console.error("No artist data available to retrieve MusicBrainz ID.");
   }
 }
+
+
+
 
 
 //Function to display the results in a container ID mb Results
