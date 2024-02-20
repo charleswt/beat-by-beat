@@ -131,12 +131,20 @@ function displayArtistInfo(data) {
 }
 
 function bookmarkHandler(bm) {
-  bm.classList.add('bx-tada');
+  if (bm.classList.contains('bx-bookmark-heart')){
+    bm.classList.add('bx-tada');
+    setTimeout(function() {
+      bm.classList.remove('bx-tada', 'bx-bookmark-heart');
+      bm.classList.add('bxs-bookmark-heart');
+    }, 1000);
+  } else {
+    bm.classList.add('bx-tada');
+    setTimeout(function() {
+      bm.classList.remove('bx-tada', 'bxs-bookmark-heart');
+      bm.classList.add('bx-bookmark-heart');
+    }, 1000);
+  }
   
-  setTimeout(function() {
-    bm.classList.remove('bx-tada', 'bx-bookmark-heart');
-    bm.classList.add('bxs-bookmark-heart');
-  }, 1000);
 }
 
 
