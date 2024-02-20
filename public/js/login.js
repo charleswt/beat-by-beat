@@ -1,22 +1,34 @@
 const loginHandler = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const email = document.querySelector('.usernameOrEmail').value.trim();
-    const password = document.querySelector('.password').value.trim();
+  const email = document.querySelector('.usernameOrEmail').value.trim();
+  const password = document.querySelector('.password').value.trim();
 
-    if (email && password){
+  if (email && password) {
+    const res = await fetch('/api/users/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-        const res = await fetch('/api/users/login', {
-            method: 'POST',
-            body: JSON.stringify({ email, password }),
-            headers: { 'Content-Type' : 'application/json' },
-        })
-
-        if (res.ok){document.location.replace('/');
-    }else{
-        alert(res.statusText)
+    if (res.ok) {
+      document.location.replace('/');
+    } else {
+      alert(res.statusText);
     }
-    }
+  }
 };
 
-document.querySelector('.submit-signin').addEventListener('submit', loginHandler);
+//password visibility
+function seeMyPassword() {
+  let input = document.getElementById('myPassword');
+  if (input.type === 'password') {
+    input.type = 'text';
+  } else {
+    input.type = 'password';
+  }
+}
+
+document
+  .querySelector('.submit-signin')
+  .addEventListener('submit', loginHandler);
