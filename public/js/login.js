@@ -3,7 +3,8 @@ const loginHandler = async (event) => {
 
   const email = document.querySelector('.usernameOrEmail').value.trim();
   const password = document.querySelector('.password').value.trim();
-
+  const errText = document.querySelector('.err-msg');
+  errText.textContent="";
   if (email && password) {
     const res = await fetch('/api/users/login', {
       method: 'POST',
@@ -14,7 +15,7 @@ const loginHandler = async (event) => {
     if (res.ok) {
       document.location.replace('/');
     } else {
-      alert(res.statusText);
+      errText.textContent = "username/email and password don't match, please try again";
     }
   }
 };
