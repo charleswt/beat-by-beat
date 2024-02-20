@@ -86,7 +86,12 @@ async function searchArtist() {
     const data = await response.json();
     displayArtistInfo(data);
     await fetchMusicVideos(data); 
-    await getMusicBrainzData(data); 
+    await getMusicBrainzData(data);
+    //Add an event listener to bookmark an artist
+    const bookmark = document.getElementById("bookmark");
+    bookmark.addEventListener("click", function() {
+        bookmarkHandler(bookmark);
+    });
   } catch(err)  {
     console.error('error:' , err);
   }
@@ -120,15 +125,12 @@ function displayArtistInfo(data) {
 
         //Append the HTML to the resultsDiv
         resultsDiv.innerHTML = artistInfoHTML;
-        //Add an event listener to bookmark an artist
-        const bookmark = document.getElementById("bookmark").addEventListener("click", bookmarkHandler(bookmark));
     } else {
         resultsDiv.innerHTML = "No results found for the artist.";
     }
 }
 
 function bookmarkHandler(bm) {
-  console.log("bookmark");
   bm.classList.add('bx-tada');
   
   setTimeout(function() {
