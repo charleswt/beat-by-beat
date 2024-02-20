@@ -16,7 +16,7 @@ In this beat-by-beat project, you will work with a group to build a full-stack c
 
 * The route `/signup`  renders a form to create a new account.
 
-* It's done when the `/project/:id` route renders an individual project's details based on the route parameter id.
+* The `/profile/:id` route renders an individual saved search details based on the route parameter id. -CHK
 
 * The route `/login` renders a form to log in.
 
