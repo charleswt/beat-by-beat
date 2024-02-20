@@ -37,6 +37,7 @@ h1 {
 h2 {
   font-size: 23px;
 }
+
 .social-icon {
   display: flex;
   justify-content: center;
@@ -80,17 +81,18 @@ h2 {
   align-self: center;
 }
 .new-text-gradient {
-  background: linear-gradient(to bottom, #93c5fd, #a5b4fc, #7e3af2);
+  background: linear-gradient(to bottom, #ffffff, #a5b4fc, #2e05a2);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+
   text-align: left;
   padding-right: 40px;
   padding-left: 40px;
 }
 
 .padding-top {
-  padding-top: 30px;
+  padding-top: 55px;
 }
 .text-center {
   text-align: center;
@@ -114,29 +116,42 @@ h2 {
 .margin-t {
   margin-top: 20px;
 }
+.letter-space {
+  letter-spacing: 2px;
+}
 
 /* new hover btns */
+
 .btn-hover {
   margin-top: 1rem;
   transition: transform 0.3s ease-in-out 0.15s,
     background-color 0.3s ease-in-out;
-  background-image: linear-gradient(to right, #ffd700, #ff8c00);
+  background-image: linear-gradient(to right, #000000, #a62ef4, #0000ff);
   cursor: pointer;
 }
 
 .btn-hover:hover {
-  transform: translateY(-1px) scale(1.2);
-  background-image: linear-gradient(to right, #ffd700, #ff8c00);
+  transform: translateY(-1px) scale(1.1);
+  background-image: linear-gradient(to right, #000000, #a62ef4, #0000ff);
   transition-duration: 0.5s;
 }
 
-.btn-hover .w-auto {
-  width: auto; /* Equivalent to w-auto */
-}
 .rounded-btn {
-  border-radius: 9999px;
-  height: 30px;
-  width: 100px;
+  border-radius: 15px;
+  height: auto;
+  width: 150px;
+  color: white;
+  font-size: 20px;
+  padding: 7px 5px;
+}
+.nav-rounded-btn {
+  border-radius: 15px;
+  height: auto;
+  width: 120px;
+  color: white;
+  font-size: 17px;
+  padding: 3px 5px;
+  text-align: center;
 }
 
 /* Equivalent to items-center and justify-center */
@@ -146,6 +161,16 @@ h2 {
 }
 .width-custom {
   width: 500px;
+}
+/* search page */
+
+.custom-element {
+  grid-row: span 1; /* Equivalent to row-span-1 */
+  width: 100%; /* Equivalent to w-full */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25); /* Equivalent to shadow-xl */
+  border-radius: 20px; /* Equivalent to rounded-xl */
+  padding: 56px 32px; /* Equivalent to px-8 py-14 */
+  margin-top: 64px; /* Equivalent to mt-16 */
 }
 
 /* max width and max height */

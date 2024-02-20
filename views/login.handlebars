@@ -31,15 +31,19 @@
           <input
             type="password"
             placeholder="Enter password"
+            id="myPassword"
             class="password border-b-2 width-custom border-gray-200 py-3 px-7"
           />
-
+          <div class="new-text-gradient font-playpen form-divs">
+              <input type="checkbox" onclick="seeMyPassword()"> Show Password
+          </div>
+          <div class="mt-3">
+            <p class="err-msg font-playpen "></p>
+          </div>
           <!--sign in button -->
           <div class="text-center py-6">
            <button type="submit" class="mt-4 
-            transition ease-in-out delay-150 bg-gradient 
-            hover:-translate-y-1 hover:scale-110 
-            hover:bg-gradient duration-300
+           btn-hover btn-hover:hover rounded-btn
             font-playpen text-[20px] text-white pr-2 pl-2 rounded-full w-auto">Sign in</button>
           </div> 
           <!--register button  -->
@@ -50,7 +54,7 @@
             {{!-btn-sign up  --}}
            <a href="/signup"> <button type="button" class="mt-4 rounded-btn
             btn-hover btn-hover:hover 
-            font-playpen text-[20px] text-white pr-2 pl-2  w-auto">Sign Up</button></a>
+            font-playpen text-[20px] text-white pr-2 pl-2 ">Sign Up</button></a>
         </div> 
     </div>
  </main>
