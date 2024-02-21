@@ -74,7 +74,7 @@ router.post("/login", async (req, res) => {
         .json({ message: "Incorrect email/username, please try again" });
       return;
     }
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = userData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res.status(400).json({ message: "Incorrect password, please try again" });
@@ -112,7 +112,7 @@ router.post("/logout", (req, res) => {
   }
 });
 
-router.post("/friendId", async (req, res) => {
+router.post("/friendId/:id", async (req, res) => {
   try {
     const itemId = req.params.id;
     const friendId = await User.findAll({
