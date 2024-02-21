@@ -54,24 +54,6 @@ document
     }
   });
 
-//Your API key for theaudiodb.com
-//Function to search for an artist
-// function searchArtist() {
-//   const artistName = document.getElementById("audioDbSearch").value;
-//   const serverUrl = `/searchArtist?artist=${encodeURIComponent(artistName)}`;
-
-//   fetch(serverUrl)
-//       .then((response) => response.json())
-//       .then((data) => {
-//           displayArtistInfo(data);
-//           fetchMusicVideos(data);
-//           getMusicBrainzData(data);
-//       })
-//       .catch((error) => {
-//           console.error("Error:", error);
-//       });
-// }
-
 // Function to search for an artist using async/await
 async function searchArtist() {
   const artistName = document.getElementById("audioDbSearch").value;
@@ -88,6 +70,7 @@ async function searchArtist() {
     await getMusicBrainzData(data);
     //Add an event listener to bookmark an artist
     const bookmark = document.getElementById("bookmark");
+    favoriteArtist(artistName, bookmark);
     bookmark.addEventListener("click", function () {
       bookmarkHandler(bookmark, artistName);
     });
@@ -96,7 +79,7 @@ async function searchArtist() {
   }
 }
 
-function bookmarkHandler(bm, name) {
+async function bookmarkHandler(bm, name) {
   if (bm.classList.contains("bx-bookmark-heart")) {
     bm.classList.add("bx-tada");
     setTimeout(function () {
@@ -152,6 +135,31 @@ async function RemoveFavoriteArtist(artist) {
   }
 }
 
+//function to check if the searched artist is already in the user's favorite artists list
+async function favoriteArtist(artist, bookmark) {
+  try {
+    const response = await fetch("/api/favorite", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+
+    const isFavorite = data.includes(artist);
+    if (isFavorite) {
+      bookmark.classList.add("bxs-bookmark-heart");
+    } else {
+      bookmark.classList.add("bx-bookmark-heart");
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
+  }
+}
+
 //Function to display artist information
 function displayArtistInfo(data) {
   console.log(data);
@@ -160,9 +168,10 @@ function displayArtistInfo(data) {
 
   if (data && data.artists) {
     const artist = data.artists[0];
+
     //Create an HTML template with the desired properties
     const artistInfoHTML = `
-            <i class='bx bx-bookmark-heart' id='bookmark' style='color:#f70707; font-size: 40px;'></i>
+            <i class='bx' id='bookmark' style='color:#f70707; font-size: 40px;'></i>
             <p><strong>Artist:</strong> ${artist.strArtist}</p>
             <p><strong>Birth Year:</strong> ${artist.intBornYear}</p>
             <p><strong>Gender:</strong> ${artist.strGender}</p>
@@ -179,24 +188,6 @@ function displayArtistInfo(data) {
     resultsDiv.innerHTML = "No results found for the artist.";
   }
 }
-
-// //Function to fetch music videos
-// function fetchMusicVideos(data) {
-//   if (data && data.artists) {
-//     const artistId = data.artists[0].idArtist;
-
-//     const serverUrl = `/fetchMusicVideos?artistId=${encodeURIComponent(artistId)}`;
-
-//     fetch(serverUrl)
-//       .then((response) => response.json())
-//       .then((musicVideosData) => {
-//         displayMusicVideos(musicVideosData);
-//       })
-//       .catch((error) => {
-//         console.error("Error:", error);
-//       });
-//   }
-// }
 
 async function fetchMusicVideos(data) {
   if (data && data.artists) {
@@ -268,26 +259,6 @@ function getYouTubeVideoId(url) {
   const match = url.match(/(?:v=|\/)([a-zA-Z0-9_-]{11})/);
   return match ? match[1] : null;
 }
-
-// //Function to grab more Artisit data from Musicbrainz APi by using MBID thats given from the audioDb request in the artist object
-// function getMusicBrainzData(data) {
-//   if (data && data.artists) {
-//     const mbId = data.artists[0].strMusicBrainzID;
-
-//     const serverUrl = `/getMusicBrainzData?mbId=${encodeURIComponent(mbId)}`;
-
-//     fetch(serverUrl)
-//       .then((response) => response.json())
-//       .then((musicBrainzData) => {
-//         displayMusicBrainzData(musicBrainzData);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching from MusicBrainz:", error);
-//       });
-//   } else {
-//     console.error("No artist data available to retrieve MusicBrainz ID.");
-//   }
-// }
 
 async function getMusicBrainzData(data) {
   if (data && data.artists) {

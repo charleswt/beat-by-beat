@@ -2,6 +2,28 @@ const router = require("express").Router();
 const authenticate = require("../../utils/authentication");
 const { Profile } = require("../../models");
 
+router.get("/", authenticate, async (req, res) => {
+  try {
+    const profileData = await Profile.findByPk(req.session.user_id);
+    if (!profileData) {
+      const statusCode = 404;
+      res.status(statusCode).render("game", {
+        layout: "error",
+        status: statusCode,
+      });
+    }
+    //check if the user already a favorite artists list. if not, create a new empty array
+    const currentFavArtists = profileData.favArtists || [];
+    res.status(200).json(currentFavArtists);
+  } catch (err) {
+    const statusCode = 400;
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,
+    });
+  }
+});
+
 router.put("/", authenticate, async (req, res) => {
   try {
     const { artist } = req.body;
