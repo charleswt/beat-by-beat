@@ -137,7 +137,7 @@ async function AddFavoriteArtist(artist) {
 async function RemoveFavoriteArtist(artist) {
   try {
     const response = await fetch("/api/favorite/remove", {
-      mothod: "PUT",
+      method: "PUT",
       body: JSON.stringify({ artist }),
       headers: {
         "Content-Type": "application/json",

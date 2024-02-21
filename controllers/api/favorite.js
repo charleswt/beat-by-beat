@@ -8,7 +8,11 @@ router.put("/", authenticate, async (req, res) => {
     const profileData = await Profile.findByPk(req.session.user_id);
 
     if (!profileData) {
-      return res.status(404).json({ message: "Profile not found" });
+      const statusCode = 404;
+      res.status(statusCode).render("game", {
+        layout: "error",
+        status: statusCode,
+      });
     }
 
     // Ensure favArtists is an array, then add the new artist
@@ -26,7 +30,6 @@ router.put("/", authenticate, async (req, res) => {
       res.status(400).json({ message: "Artist is already in favorites" });
     }
   } catch (err) {
-    console.error(err);
     const statusCode = 400;
     res.status(statusCode).render("game", {
       layout: "error",
@@ -35,9 +38,37 @@ router.put("/", authenticate, async (req, res) => {
   }
 });
 
+router.put("/remove", authenticate, async (req, res) => {
+  try {
+    const { artist } = req.body;
+    const userId = req.session.user_id;
 
+    const userProf = await Profile.findByPk(userId);
+    if (!userProf) {
+      const statusCode = 404;
+      res.status(statusCode).render("game", {
+        layout: "error",
+        status: statusCode,
+      });
+    }
+    //check if the user already a favorite artists list. if not, create a new empty array
+    const currentFavArtists = userProf.favArtists || [];
+    //removing a matching artist's name
+    const updatedFavArtists = currentFavArtists.filter((a) => a !== artist);
 
+    // Setting the field to the updates array
+    userProf.favArtists = updatedFavArtists;
+    await userProf.save();
 
-
+    res.json({ message: "Artist removed from favorites" });
+  } catch (err) {
+    console.error(err);
+    const statusCode = 500;
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,
+    });
+  }
+});
 
 module.exports = router;
