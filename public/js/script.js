@@ -117,7 +117,7 @@ function bookmarkHandler(bm, name) {
 async function AddFavoriteArtist(artist) {
   try {
     const response = await fetch("/api/favorite", {
-      mothod: "POST",
+      method: "PUT",
       body: JSON.stringify({ artist }),
       headers: {
         "Content-Type": "application/json",
@@ -126,6 +126,8 @@ async function AddFavoriteArtist(artist) {
 
     if (response.ok) {
       console.log("artist added to favorites");
+    } else {
+      console.error("Failed to add artist to favorites:", response.statusText);
     }
   } catch (err) {
     console.error("Error:", err);
@@ -134,8 +136,8 @@ async function AddFavoriteArtist(artist) {
 
 async function RemoveFavoriteArtist(artist) {
   try {
-    const response = await fetch("/api/favorite", {
-      mothod: "POST",
+    const response = await fetch("/api/favorite/remove", {
+      mothod: "PUT",
       body: JSON.stringify({ artist }),
       headers: {
         "Content-Type": "application/json",
