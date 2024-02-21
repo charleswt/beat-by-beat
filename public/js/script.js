@@ -163,7 +163,7 @@ async function favoriteArtist(artist, bookmark) {
 //Function to display artist information
 function displayArtistInfo(data) {
   console.log(data);
-  const resultsDiv = document.getElementById("results");
+  const resultsDiv = document.getElementById("container");
   resultsDiv.innerHTML = "";
 
   if (data && data.artists) {
@@ -287,6 +287,7 @@ function displayMusicBrainzData(musicBrainzData) {
   const mbDataDiv = document.getElementById("mbResults");
   mbDataDiv.innerHTML = ""; // Clear previous results
 
+  const resultDiv = document.getElementById("container");
   if (musicBrainzData) {
     const mbDataHTML = `
           <p><strong>Birth Area:</strong> ${
@@ -296,9 +297,10 @@ function displayMusicBrainzData(musicBrainzData) {
             musicBrainzData["life-span"].begin
           } to ${musicBrainzData["life-span"].end || "present"}</p>
       `;
-
     //Append the HTML to the mbDataDiv
     mbDataDiv.innerHTML = mbDataHTML;
+    resultDiv.append(mbDataDiv);
+
   } else {
     mbDataDiv.innerHTML = "No MusicBrainz data available for this artist.";
   }
