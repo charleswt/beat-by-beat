@@ -1253,3 +1253,14 @@ h2 {
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 }
+
+#container {
+  display: none;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border-radius: 12px;
+  border: 2px solid rgba(225, 225, 225, 0.2);
+  background-color: transparent;
+  backdrop-filter: blur(30px);
+  padding: 20px 10px;
+}

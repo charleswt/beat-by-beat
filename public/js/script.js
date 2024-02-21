@@ -164,6 +164,7 @@ async function favoriteArtist(artist, bookmark) {
 function displayArtistInfo(data) {
   console.log(data);
   const resultsDiv = document.getElementById("container");
+  resultsDiv.style.display = "flex";
   resultsDiv.innerHTML = "";
 
   if (data && data.artists) {
