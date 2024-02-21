@@ -1,15 +1,14 @@
 const router = require('express').Router();
+const { where } = require('sequelize');
+const { User } = require('../models');
 const authenticate = require('../utils/authentication.js');
 
-router.get('/',authenticate, async (req, res) => {
-  try {
-  //   const userData = await User.findAll({
-  //     attributes: { exclude: ['password'] },
-  //     order: [['name', 'ASC']],
-  //   });
-  //   const usersData = userData.map((user) => user.get({ plain: true}));
+
+router.get('/', authenticate, async (req, res) => {
+  console.log(`request${req.session}`)
+   try {
     res.render('homepage', {logged_in: req.session.logged_in});
-  } catch (err) {
+   } catch (err) {
     const statusCode = 500;
       // Render your template and pass the status code as part of the data object
       res.status(statusCode).render("game", {
@@ -17,11 +16,14 @@ router.get('/',authenticate, async (req, res) => {
         status: statusCode,
   });
 }
-});
 
 router.get('/dashboard', authenticate, async (req,res) => {
   try{
-    res.render('dashboard');
+     const userData = await User.findAll({
+       where: { name: req.body.email }
+         
+     })
+    res.render('dashboard', { logged_in: req.session.logged_in , userData });
   } catch(err){
     const statusCode = 500;
     // Render the template and pass the status code as part of the data object
@@ -29,8 +31,19 @@ router.get('/dashboard', authenticate, async (req,res) => {
       layout: "error",
       status: statusCode,  });
     }
-});
 
+
+router.get('/profile', authenticate, (req,res) => {
+  try{
+    res.render('profile', {logged_in: req.session.logged_in})
+   } catch (err) {
+    const statusCode = 500;
+      // Render your template and pass the status code as part of the data object
+      res.status(statusCode).render("game", {
+        layout: "error",
+        status: statusCode,
+  });
+}
 router.get('/signup', (req,res) => {
   try{
     res.render('signup')
@@ -66,6 +79,7 @@ router.get('/aboutus', (req,res) => {
       status: statusCode,  });
     }
 })
+
 router.get('/login', async (req, res) => {
   try{
     if (req.session.logged_in) {
@@ -80,6 +94,7 @@ router.get('/login', async (req, res) => {
       layout: "error",
       status: statusCode,  });
     }
+  
 });
 
 module.exports = router;

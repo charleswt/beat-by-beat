@@ -42,6 +42,7 @@ router.post("/", async (req, res) => {
         status: statusCode,
       });
     }
+
   }
 });
 
@@ -52,17 +53,20 @@ router.post("/login", async (req, res) => {
         [Op.or]: [{ email: req.body.email }, { name: req.body.email }],
       },
     });
-
+    
     if (!userData) {
       res
         .status(400)
         .json({ message: "Incorrect email/username, please try again" });
       return;
     }
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = userData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res.status(400).json({ message: "Incorrect password, please try again" });
+      console.log(err)
+      res
+        .status(400)
+        .json({ message: 'Incorrect password, please try again' });
       return;
     }
 
@@ -80,6 +84,7 @@ router.post("/login", async (req, res) => {
       status: statusCode,
     });
   }
+
 });
 
 router.post("/logout", (req, res) => {
@@ -94,6 +99,18 @@ router.post("/logout", (req, res) => {
       layout: "error",
       status: statusCode,
     });
+
+
+router.post('/friendId', async (req, res) => {
+  try {
+    const itemId = req.params.id;
+    const friendId = await User.findAll({
+      where: { name: itemId },
+      attributes: ['id']
+    });
+  } catch(err) {
+    console.error(err);
+    res.status(500).render('game', { layout: 'error', message: 'Could not GET friendId' });
   }
 });
 
