@@ -1000,7 +1000,7 @@ h2 {
 
 .btn-hover:hover {
   transform: translateY(-1px) scale(1.1);
-  background-image: linear-gradient(to right, #000000, #a62ef4, #0000ff);
+  background-image: linear-gradient(to right, #76e0f0, #a62ef4, #0000ff);
   transition-duration: 0.5s;
 }
 
@@ -1048,6 +1048,12 @@ h2 {
 #bookmark:hover {
   cursor: pointer;
   transform: scale(1.1);
+}
+
+.border {
+  border-radius: 15px;
+  border-color: #020217;
+  border-width: 3px;
 }
 
 /* max width and max height */

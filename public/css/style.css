@@ -132,7 +132,7 @@ h2 {
 
 .btn-hover:hover {
   transform: translateY(-1px) scale(1.1);
-  background-image: linear-gradient(to right, #000000, #a62ef4, #0000ff);
+  background-image: linear-gradient(to right, #76e0f0, #a62ef4, #0000ff);
   transition-duration: 0.5s;
 }
 
@@ -176,6 +176,12 @@ h2 {
 #bookmark:hover {
   cursor: pointer;
   transform: scale(1.1);
+}
+
+.border {
+  border-radius: 15px;
+  border-color: #020217;
+  border-width: 3px;
 }
 
 /* max width and max height */
@@ -254,4 +260,16 @@ h2 {
   background: linear-gradient(to right, (255, 255, 255, 0), red);
   content: '';
   z-index: 2;
+}
+
+#bookmark:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
