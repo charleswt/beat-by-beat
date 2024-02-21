@@ -1,5 +1,9 @@
 <div class="bg-white w-100">
-{{!-- {{#each friends as |user.friendsId|}}
-
-{{/each}} --}}
+  {{#each friendId as | userData |}}
+<div>
+    <a>{{userData.name}}</a>
+    <a>{{userData.songArray}}</a>
+    <button class="friend-request"></button>
+</div>
+{{/each}}
 </div>

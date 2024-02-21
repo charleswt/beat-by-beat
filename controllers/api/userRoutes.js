@@ -82,4 +82,18 @@ router.post('/logout', (req, res) => {
     res.status(500).render('game', { layout: 'error', message: 'Could not POST logout' });}
 });
 
+
+router.post('/friendId', async (req, res) => {
+  try {
+    const itemId = req.params.id;
+    const friendId = await User.findAll({
+      where: { name: itemId },
+      attributes: ['id']
+    });
+  } catch(err) {
+    console.error(err);
+    res.status(500).render('game', { layout: 'error', message: 'Could not GET friendId' });
+  }
+});
+
 module.exports = router;
