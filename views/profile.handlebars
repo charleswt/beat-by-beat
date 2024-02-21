@@ -1,0 +1,11 @@
+<h1>My Profile</h1>
+<h2>My Favorite Artists</h2>
+{{#if favArtists.length}}
+  <ul class="favorite-artists">
+    {{#each favArtists}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>You have no favorite artists saved.</p>
+{{/if}}

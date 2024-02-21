@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { where } = require("sequelize");
 const { User } = require("../models");
+const { Profile } = require("../models");
 const authenticate = require("../utils/authentication.js");
 
 router.get("/", authenticate, async (req, res) => {
@@ -38,12 +39,20 @@ router.get("/dashboard", authenticate, async (req, res) => {
   }
 });
 
-router.get("/profile", authenticate, (req, res) => {
+router.get("/profile", authenticate, async (req, res) => {
   try {
-    res.render("profile", { logged_in: req.session.logged_in });
-  } catch (err) {
+    const profileData = await Profile.findByPk(req.session.user_id);
+    const favArtists = profileData.favArtists || [];
+    console.log('favArtists:', favArtists); //debugging
+    console.log('logged_in:', req.session.logged_in); //debbugging
+    res.render("profile", {
+      logged_in: 
+      req.session.logged_in,
+      favArtists
+    });
+  }  catch (err) {
     const statusCode = 500;
-    // Render your template and pass the status code as part of the data object
+    // Render the template and pass the status code as part of the data object
     res.status(statusCode).render("game", {
       layout: "error",
       status: statusCode,
