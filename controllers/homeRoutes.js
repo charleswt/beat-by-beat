@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { where } = require('sequelize');
 const { User } = require('../models');
 const authenticate = require('../utils/authentication.js');
 
@@ -14,15 +15,11 @@ router.get('/', authenticate, async (req, res) => {
 
 router.get('/dashboard', authenticate, async (req,res) => {
   try{
-    // const userData = await User.findAll({
-    //   where: {
-    //     [Op.or]: [
-    //       { email: req.body.email },
-    //       { name: req.body.email }
-    //     ]
-    //   }
-    // })
-    res.render('dashboard', { logged_in: req.session.logged_in });
+     const userData = await User.findAll({
+       where: { name: req.body.email }
+         
+     })
+    res.render('dashboard', { logged_in: req.session.logged_in , userData });
   } catch(err){
     console.error(err);
     res.status(500).render('game', { layout: 'error', message: 'Could not GET dashboard' });
