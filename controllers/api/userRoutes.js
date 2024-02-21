@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
       } 
     }else {
       console.error(err);
-    res.status(500).render('error', { layout: 'error', message: 'Could not POST homepage' });
+    res.status(500).render('game', { layout: 'error', message: 'Could not POST homepage' });
   }
   }
 });
@@ -43,7 +43,7 @@ router.post('/login', async (req, res) => {
         ]
       }
     });
-
+    
     if (!userData) {
       res
         .status(400)
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
     const validPassword = userData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      console.log('Incorrect password, please try again')
+      console.log(err)
       res
         .status(400)
         .json({ message: 'Incorrect password, please try again' });
@@ -68,8 +68,8 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (err) {
-    console.error('Incorrect password, please try again');
-    res.status(500).render('error', { layout: 'error', message: 'Could not POST logout' });}
+    console.error(err);
+    res.status(500).render('game', { layout: 'error', message: 'Could not POST logout' });}
 });
 
 router.post('/logout', (req, res) => {
@@ -79,7 +79,7 @@ router.post('/logout', (req, res) => {
     });
   } else {
     console.error(err);
-    res.status(500).render('error', { layout: 'error', message: 'Could not POST logout' });}
+    res.status(500).render('game', { layout: 'error', message: 'Could not POST logout' });}
 });
 
 module.exports = router;
