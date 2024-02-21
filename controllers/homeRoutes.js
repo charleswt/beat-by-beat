@@ -18,12 +18,17 @@ router.get("/", authenticate, async (req, res) => {
 });
 
 router.get("/dashboard", authenticate, async (req, res) => {
+  console.log("hello world!")
   try {
-    const userData = await User.findAll({
-      where: { name: req.body.email },
+    const users = await User.findAll({
+      //where: { name: req.body.email },
     });
+    
+    const userData = users.map((project) => project.get({ plain: true }));
+    console.log(userData);
     res.render("dashboard", { logged_in: req.session.logged_in, userData });
   } catch (err) {
+    console.log(err);
     const statusCode = 500;
     // Render the template and pass the status code as part of the data object
     res.status(statusCode).render("game", {

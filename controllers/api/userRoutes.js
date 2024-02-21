@@ -95,7 +95,7 @@ router.post("/logout", (req, res) => {
   }
 });
 
-router.post("/friendId", async (req, res) => {
+router.post("/friendId/:id", async (req, res) => {
   try {
     const itemId = req.params.id;
     const friendId = await User.findAll({
