@@ -17,13 +17,11 @@ router.post("/", async (req, res) => {
       //check if the error occurs at the email field
       const isEmail = err.errors[0].path === "email";
       //if isEmail, send a message
-      res
-        .status(409)
-        .json({
-          message: isEmail
-            ? "Email already in use, please choose another."
-            : "Username already taken, please choose another.",
-        });
+      res.status(409).json({
+        message: isEmail
+          ? "Email already in use, please choose another."
+          : "Username already taken, please choose another.",
+      });
     } else if (err.name === "SequelizeValidationError") {
       // Find out if the error is related to the password field
       const isPasswordError = err.errors.some(
