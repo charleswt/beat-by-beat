@@ -36,6 +36,10 @@ User.init(
         len: [8],
       },
     },
+    friendId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    }
   },
   {
     hooks: {
