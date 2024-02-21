@@ -1154,6 +1154,10 @@ h2 {
   width: 50%;
 }
 
+.favorite-artists {
+  color: #ffffff;
+}
+
 .hover\:bg-gradient:hover {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
   --tw-gradient-from: #000 var(--tw-gradient-from-position);
