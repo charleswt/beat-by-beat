@@ -17,13 +17,11 @@ router.post("/", async (req, res) => {
       //check if the error occurs at the email field
       const isEmail = err.errors[0].path === "email";
       //if isEmail, send a message
-      res
-        .status(409)
-        .json({
-          message: isEmail
-            ? "Email already in use, please choose another."
-            : "Username already taken, please choose another.",
-        });
+      res.status(409).json({
+        message: isEmail
+          ? "Email already in use, please choose another."
+          : "Username already taken, please choose another.",
+      });
     } else if (err.name === "SequelizeValidationError") {
       // Find out if the error is related to the password field
       const isPasswordError = err.errors.some(
@@ -42,7 +40,6 @@ router.post("/", async (req, res) => {
         status: statusCode,
       });
     }
-
   }
 });
 
@@ -53,7 +50,7 @@ router.post("/login", async (req, res) => {
         [Op.or]: [{ email: req.body.email }, { name: req.body.email }],
       },
     });
-    
+
     if (!userData) {
       res
         .status(400)
@@ -63,10 +60,8 @@ router.post("/login", async (req, res) => {
     const validPassword = userData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      console.log(err)
-      res
-        .status(400)
-        .json({ message: 'Incorrect password, please try again' });
+      console.log(err);
+      res.status(400).json({ message: "Incorrect password, please try again" });
       return;
     }
 
@@ -84,7 +79,6 @@ router.post("/login", async (req, res) => {
       status: statusCode,
     });
   }
-
 });
 
 router.post("/logout", (req, res) => {
@@ -99,18 +93,21 @@ router.post("/logout", (req, res) => {
       layout: "error",
       status: statusCode,
     });
+  }
+});
 
-
-router.post('/friendId', async (req, res) => {
+router.post("/friendId", async (req, res) => {
   try {
     const itemId = req.params.id;
     const friendId = await User.findAll({
       where: { name: itemId },
-      attributes: ['id']
+      attributes: ["id"],
     });
-  } catch(err) {
+  } catch (err) {
     console.error(err);
-    res.status(500).render('game', { layout: 'error', message: 'Could not GET friendId' });
+    res
+      .status(500)
+      .render("game", { layout: "error", message: "Could not GET friendId" });
   }
 });
 
