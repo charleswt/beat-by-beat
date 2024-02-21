@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authenticate = require("../../utils/authentication");
 const { Profile } = require("../../models");
 
-router.put("/api/favorite", authenticate, async (req, res) => {
+router.put("/", authenticate, async (req, res) => {
   try {
     const { artist } = req.body;
     const profileData = await Profile.findByPk(req.session.user_id);
