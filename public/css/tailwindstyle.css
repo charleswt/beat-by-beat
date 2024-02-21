@@ -1036,9 +1036,49 @@ h2 {
 
 /* search page */
 
+.grid {
+  display: grid;
+  grid-template-rows: auto auto auto;
+}
+
+.row-span-1 {
+  grid-row: span 1;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-medium {
+  width: 700px;
+}
+
+.py-14 {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+.px-8 {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.pb-3 {
+  padding-bottom: 12px;
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(118, 224, 240, 0.1),
+    0 18px 10px -6px rgba(118, 224, 240, 0.1);
+}
+
+.rounded-xl {
+  border-radius: 12px;
+}
+
 .custom-element {
   grid-row: span 1;
-  width: 100%;
+  width: auto;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   padding: 56px 32px;
