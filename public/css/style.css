@@ -255,3 +255,8 @@ h2 {
   content: '';
   z-index: 2;
 }
+
+#bookmark:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

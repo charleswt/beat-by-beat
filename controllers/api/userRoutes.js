@@ -1,17 +1,34 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Profile  } = require("../../models");
 const { Op } = require("sequelize");
 
 router.post("/", async (req, res) => {
+  let transaction;
   try {
-    const userData = await User.create(req.body);
+    // `transaction` is initialized and passed to ensure atomicity.
+    transaction = await User.sequelize.transaction();
+    const userData = await User.create(req.body, { transaction });
+    
+    // A new profile for the user is created at the same time using transaction
+    await Profile.create({
+      user_id: userData.id,
+      favArtists: [],
+      friends: [],
+    }, { transaction });
+
+    // If everything goes well, commit the transaction.
+    await transaction.commit();
 
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
       res.json({ message: "logged in" });
     });
+
   } catch (err) {
+    // If any of the above actions fail, we will try to rollback our transaction.
+    if (transaction) await transaction.rollback();
+
     //if the error involves a unique constraint violation,
     if (err.name === "SequelizeUniqueConstraintError") {
       //check if the error occurs at the email field
