@@ -173,6 +173,11 @@ h2 {
   margin-top: 64px; /* Equivalent to mt-16 */
 }
 
+#bookmark:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 /* max width and max height */
 /* Equivalent to max-w-screen-md */
 @media (max-width: 768px) {

@@ -3,15 +3,19 @@ const { where } = require('sequelize');
 const { User } = require('../models');
 const authenticate = require('../utils/authentication.js');
 
+
 router.get('/', authenticate, async (req, res) => {
   console.log(`request${req.session}`)
    try {
     res.render('homepage', {logged_in: req.session.logged_in});
-  } catch (err) {
-    console.error(err);
-    res.status(500).render('game', { layout: 'error', message: 'Could not GET homepage' });
-  }
-});
+   } catch (err) {
+    const statusCode = 500;
+      // Render your template and pass the status code as part of the data object
+      res.status(statusCode).render("game", {
+        layout: "error",
+        status: statusCode,
+  });
+}
 
 router.get('/dashboard', authenticate, async (req,res) => {
   try{
@@ -21,37 +25,60 @@ router.get('/dashboard', authenticate, async (req,res) => {
      })
     res.render('dashboard', { logged_in: req.session.logged_in , userData });
   } catch(err){
-    console.error(err);
-    res.status(500).render('game', { layout: 'error', message: 'Could not GET dashboard' });
-  }
-});
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
+
 
 router.get('/profile', authenticate, (req,res) => {
   try{
     res.render('profile', {logged_in: req.session.logged_in})
-  } catch(err){
-    console.error(err);
-    res.status(500).render('game', { layout: 'error', message: 'Could not GET profile' });
-  }
-});
-
+   } catch (err) {
+    const statusCode = 500;
+      // Render your template and pass the status code as part of the data object
+      res.status(statusCode).render("game", {
+        layout: "error",
+        status: statusCode,
+  });
+}
 router.get('/signup', (req,res) => {
   try{
     res.render('signup')
   } catch(err){
-    console.error(err);
-    res.status(500).render('game', { layout: 'error', message: 'Could not GET signup' });
-  }
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
 });
 
 router.get('/logout', async (req,res) => {
   try {
     return req.session.logged_in = false;
   } catch(err){
-    console.error(err);
-    res.status(500).render('game', { layout: 'error', message: 'Could not GET signout' });
-  }
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
 });
+
+router.get('/aboutus', (req,res) => {
+  try{
+    res.render('aboutus')
+  } catch(err){
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
+})
 
 router.get('/login', async (req, res) => {
   try{
@@ -61,9 +88,13 @@ router.get('/login', async (req, res) => {
   }
     res.render('login')
   } catch(err){
-    console.error(err);
-    res.status(500).render('game', { layout: 'error', message: 'Could not GET login' });
-  }
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,  });
+    }
+  
 });
 
 module.exports = router;
