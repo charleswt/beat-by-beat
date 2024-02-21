@@ -266,3 +266,10 @@ h2 {
   cursor: pointer;
   transform: scale(1.1);
 }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
