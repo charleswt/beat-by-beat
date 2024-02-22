@@ -163,8 +163,9 @@ async function favoriteArtist(artist, bookmark) {
 //Function to display artist information
 function displayArtistInfo(data) {
   console.log(data);
-  const resultsDiv = document.getElementById("container");
-  resultsDiv.style.display = "block";
+  const resultsDiv = document.getElementById("results");
+  const containerDiv = document.getElementById("container");
+  containerDiv.style.display = "block";
   resultsDiv.innerHTML = "";
 
   if (data && data.artists) {
@@ -288,7 +289,7 @@ function displayMusicBrainzData(musicBrainzData) {
   const mbDataDiv = document.getElementById("mbResults");
   mbDataDiv.innerHTML = ""; // Clear previous results
 
-  const resultDiv = document.getElementById("container");
+  const resultDiv = document.getElementById("results");
   if (musicBrainzData) {
     const mbDataHTML = `
           <p><strong>Birth Area:</strong> ${
