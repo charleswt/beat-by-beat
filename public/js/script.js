@@ -164,6 +164,8 @@ async function favoriteArtist(artist, bookmark) {
 function displayArtistInfo(data) {
   console.log(data);
   const resultsDiv = document.getElementById("results");
+  const containerDiv = document.getElementById("container");
+  containerDiv.style.display = "block";
   resultsDiv.innerHTML = "";
 
   if (data && data.artists) {
@@ -179,7 +181,7 @@ function displayArtistInfo(data) {
             <p><strong>Genre:</strong> ${artist.strGenre}</p>
             <p><strong>Label:</strong> ${artist.strLabel}</p>
             <p><strong>Website:</strong> <a href="${artist.strWebsite}" target="_blank">${artist.strWebsite}</a></p>
-            <p><strong>Biography:</strong><br>${artist.strBiographyEN}</p>
+            <p><strong>Biography:</strong><br>${artist.strBiographyEN.replace(/\n/g, '<br>')}</p>
         `;
 
     //Append the HTML to the resultsDiv
@@ -287,6 +289,7 @@ function displayMusicBrainzData(musicBrainzData) {
   const mbDataDiv = document.getElementById("mbResults");
   mbDataDiv.innerHTML = ""; // Clear previous results
 
+  const resultDiv = document.getElementById("results");
   if (musicBrainzData) {
     const mbDataHTML = `
           <p><strong>Birth Area:</strong> ${
@@ -296,9 +299,10 @@ function displayMusicBrainzData(musicBrainzData) {
             musicBrainzData["life-span"].begin
           } to ${musicBrainzData["life-span"].end || "present"}</p>
       `;
-
     //Append the HTML to the mbDataDiv
     mbDataDiv.innerHTML = mbDataHTML;
+    resultDiv.append(mbDataDiv);
+
   } else {
     mbDataDiv.innerHTML = "No MusicBrainz data available for this artist.";
   }
