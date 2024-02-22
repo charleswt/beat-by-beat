@@ -1,6 +1,6 @@
 const User = require('./User');
 const Profile = require('./Profile');
-const savedSongs = require('./savedSongs')
+const savedSong = require('./savedSongs')
 
 //association between the user and profile models. 
 User.hasOne(Profile, {
@@ -22,8 +22,8 @@ User.belongsToMany(User, {
 // the user model will track songs 
 // use that to track song data
 
-User.hasMany(savedSongs, {
-
+User.hasMany(savedSong, {
+    foreignKey: 'user_id',
 })
 
-module.exports = { User, Profile };
+module.exports = { User, Profile, savedSong };
