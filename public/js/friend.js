@@ -6,3 +6,7 @@
 // add user from id to logged in user
 // adds user to logged in user based on user alias "friend"
 // 
+
+const getId = () => {};
+
+document.querySelectorAll('.get-user-id').addEventListener('click', getId);

@@ -40,8 +40,12 @@ User.init(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    songArray: {
-      type: DataTypes.INTEGER,//need to make array but coke breaks:/
+    savedSong: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'savedSongs',
+        key: 'id'
+      }
     }
   },
   {
