@@ -24,6 +24,21 @@ router.get("/", authenticate, async (req, res) => {
   }
 });
 
+router.get("/:artistName", authenticate, (req, res) => {
+  console.log("router hit");
+  try {
+    const artistName = req.params.artistName;
+    res.status(200).redirect(`/?artistName=${artistName}`);
+      //res.status(200).render("homepage", { layout: "main" });
+  } catch (err) {
+    const statusCode = 400;
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,
+    });
+  }
+});
+
 router.put("/", authenticate, async (req, res) => {
   try {
     const { artist } = req.body;
