@@ -1,10 +1,13 @@
 const getId = async (userId) => {
     try {
-      const response = await fetch(`/friendsId/${userId}`, {
+        console.log(userId)
+      const response = await fetch(`/api/users/friendsId/${userId}`, {
         method: 'POST',
+        body: JSON.stringify({}),
         headers: {
           'Content-Type': 'application/json',
         },
+        
       });
   
       if (response.ok) {
@@ -16,11 +19,12 @@ const getId = async (userId) => {
       console.error(error);
     }
   };
-  
-  document.querySelectorAll('.friend-request').forEach(button => {
-    button.addEventListener('click', () => {
-      const userId = button.getAttribute('data-id');
-  
-      getId(userId);
-    });
-  });
+
+   var listenClick = document.querySelector('.submit-btn');
+   listenClick.addEventListener('click', (event)=> {
+    console.log(event)
+    if (event.target.tagName === "BUTTON") {
+       var userId = event.target.getAttribute('data-id');
+       getId(userId);
+    }
+   });
