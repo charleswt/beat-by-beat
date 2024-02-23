@@ -1,11 +1,15 @@
-<h1>My Profile</h1>
-<h2>My Favorite Artists</h2>
+<main id="profile" class="grid gap-12 items-center justify-center padding-top">
+
+<h1 class="new-text-gradient form-divs font-playpen pb-3">My Favorite Artists</h1>
+{{!-- <h2 class="new-text-gradient form-text font-playpen">My Favorite Artists</h2> --}}
+
 {{#if favArtists.length}}
-  <ul class="favorite-artists">
+  <ul class="favorite-artists font-playpen ">
     {{#each favArtists}}
-      <li>{{this}}</li>
+      <li class="new-text-gradient">{{this}}</li>
     {{/each}}
   </ul>
 {{else}}
   <p>You have no favorite artists saved.</p>
 {{/if}}
+</main>
