@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Profile  } = require("../../models");
+const { User, Profile, Friends } = require("../../models");
 const { Op } = require("sequelize");
 
 router.post("/", async (req, res) => {
@@ -112,18 +112,42 @@ router.post("/logout", (req, res) => {
   }
 });
 
-router.post("/friendId/:id", async (req, res) => {
+router.post('/friendsId/:userId', async (req, res) => {
+  const { userId } = req.params;
+
   try {
-    const itemId = req.params.id;
-    const friendId = await User.findAll({
-      where: { name: itemId },
-      attributes: ["id"],
+    // Find the current logged-in user, you may have to adjust this based on your authentication logic
+    const loggedInUserId = req.session.user_id; // Replace with your actual logged-in user ID
+
+    // Check if the friendship already exists
+    const existingFriendship = await Friends.findOne({
+      where: {
+        userId: loggedInUserId,
+        friendId: userId,
+      },
     });
+
+    if (existingFriendship) {
+      // Friendship already exists
+      return res.status(400).json({ message: 'Friend already exists' });
+    }
+
+    // Create a new friendship
+    const newFriendship = await Friends.create({
+      userId: loggedInUserId,
+      friendId: userId,
+    });
+
+    // You can do additional logic or send a response as needed
+    res.status(200).json({ message: 'Friend added successfully', friend: newFriendship });
   } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .render("game", { layout: "error", message: "Could not GET friendId" });
+    console.log(err);
+    const statusCode = 400;
+    // Render your template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,
+    });
   }
 });
 

@@ -1,12 +1,26 @@
-// make querySelectorAll for on click buttons 
-// create a for loop to loop through each button to add click event
-// create function to be added to click event 
-// define what function take in data-id value
-// make fetch request that /friendsId/data-id value
-// add user from id to logged in user
-// adds user to logged in user based on user alias "friend"
-// 
-
-const getId = () => {};
-
-document.querySelectorAll('.get-user-id').addEventListener('click', getId);
+const getId = async (userId) => {
+    try {
+      const response = await fetch(`/friendsId/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        console.log(`User with ID ${userId} added successfully`);
+      } else {
+        console.error(`Failed to add user with ID ${userId}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  document.querySelectorAll('.friend-request').forEach(button => {
+    button.addEventListener('click', () => {
+      const userId = button.getAttribute('data-id');
+  
+      getId(userId);
+    });
+  });

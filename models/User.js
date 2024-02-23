@@ -36,17 +36,6 @@ User.init(
         len: [8],
       },
     },
-    friendId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    savedSong: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'savedSongs',
-        key: 'id'
-      }
-    }
   },
   {
     hooks: {

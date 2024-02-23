@@ -60,6 +60,19 @@ router.get("/profile", authenticate, async (req, res) => {
   }
 });
 
+router.get("/aboutus", (req, res) => {
+  try {
+    res.render("aboutus");
+  } catch (err) {
+    const statusCode = 500;
+    // Render the template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,
+    });
+  }
+});
+
 router.get("/signup", (req, res) => {
   try {
     res.render("signup");
@@ -76,19 +89,6 @@ router.get("/signup", (req, res) => {
 router.get("/logout", async (req, res) => {
   try {
     return (req.session.logged_in = false);
-  } catch (err) {
-    const statusCode = 500;
-    // Render the template and pass the status code as part of the data object
-    res.status(statusCode).render("game", {
-      layout: "error",
-      status: statusCode,
-    });
-  }
-});
-
-router.get("/aboutus", (req, res) => {
-  try {
-    res.render("aboutus");
   } catch (err) {
     const statusCode = 500;
     // Render the template and pass the status code as part of the data object

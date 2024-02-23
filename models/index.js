@@ -1,5 +1,6 @@
 const User = require('./User');
 const Profile = require('./Profile');
+const Friends = require('./friends');
 
 //association between the user and profile models. 
 User.hasOne(Profile, {
@@ -12,9 +13,10 @@ Profile.belongsTo(User, {
 });
 
 User.belongsToMany(User, {
-    through: 'friends_id',
-    foreignKey: 'id',
-    as: 'friends'
+    through: Friends,
+    as: 'friends',
+    foreignKey: 'user_id'
+    
 });
 
-module.exports = { User, Profile };
+module.exports = { User, Profile, Friends };

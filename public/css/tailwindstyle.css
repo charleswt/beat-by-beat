@@ -1206,7 +1206,7 @@ h2 {
   height: 5.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 1rem;
-  border-radius: 3px;
+  border-radius: .5rem;
   margin: 0 auto;
 }
 
@@ -1219,6 +1219,7 @@ h2 {
 
 .prof-marg {
   margin: 1rem;
+  font-size: 1.2rem;
 }
 
 .prof-align {
@@ -1237,6 +1238,11 @@ h2 {
 }
 
 /*\/ dashboard cards /\*/
+
+.search-width {
+  width: 60%;
+  margin: 0 auto;
+}
 
 .hover\:bg-gradient:hover {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));

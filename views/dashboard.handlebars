@@ -1,13 +1,14 @@
 <div class="bg-color">
   {{#each userData as | friend |}}
-  <div class="prof-marg">
-    <div class="friend-box">
+    <div class="prof-marg">
+      <div class="friend-box">
         <div class="prof-align">
-    <p class="prof-marg">{{this.name}}</p>
-    <p class="prof-marg">{{this.artistArray}}example, example, eaxmple</p>
-    <button data-id={{this.id}} class="friend-request">Add Friend</button>
+          <p class="prof-marg">{{friend.name}}</p>
+          <p class="prof-marg">{{friend.artistArray}}</p>
+          <button data-id={{friend.id}} class="friend-request">Add Friend</button>
+        </div>
+      </div>
     </div>
-    </div>
+  {{/each}}
 </div>
-{{/each}}
-</div>
+<script src="/js/friend.js"></script>
