@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //Code For Api requests from AudioDB and MusicBrainz
 //Add an event listener to the Search Artist button
-document.getElementById("searchButton").addEventListener("click", searchArtist);
+// document.getElementById("searchButton").addEventListener("click", searchArtist);
 
 //Add a keydown event listener to the input field
 document

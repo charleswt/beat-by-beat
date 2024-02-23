@@ -113,17 +113,19 @@ router.post("/logout", (req, res) => {
 });
 
 router.post('/friendsId/:userId', async (req, res) => {
-  const { userId } = req.params;
+
+  const userId = req.params.userId;
+  console.log(userId);
 
   try {
     // Find the current logged-in user, you may have to adjust this based on your authentication logic
     const loggedInUserId = req.session.user_id; // Replace with your actual logged-in user ID
-
+console.log(loggedInUserId);
     // Check if the friendship already exists
     const existingFriendship = await Friends.findOne({
       where: {
-        userId: loggedInUserId,
-        friendId: userId,
+        user_id: loggedInUserId,
+        friend_id: userId,
       },
     });
 
