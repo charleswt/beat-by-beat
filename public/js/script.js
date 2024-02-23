@@ -1,3 +1,4 @@
+
 console.log("I am connected :)");
 // Burger menus
 document.addEventListener("DOMContentLoaded", function () {
@@ -38,27 +39,72 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   }
+
+  favoriteArtistcheck();
+
 });
 
 //Code For Api requests from AudioDB and MusicBrainz
 //Add an event listener to the Search Artist button
-document.getElementById("searchButton").addEventListener("click", searchArtist);
+const searchBtn = document.getElementById("searchButton");
+if (searchBtn) {
+  searchBtn.addEventListener("click", searchArtist);
+}
+//document.getElementById("searchButton").addEventListener("click", searchArtist);
+
+const favArtist = document.querySelectorAll(".artist");
+console.log(favArtist);
+if (favArtist.length > 0) {
+  console.log("button clicked!");
+  favArtist.forEach((artist) => {
+    artist.addEventListener("click", searchArtist);
+  });
+}
 
 //Add a keydown event listener to the input field
-document
-  .getElementById("audioDbSearch")
-  .addEventListener("keydown", function (event) {
+const audioDbSearch = document.getElementById("audioDbSearch");
+if (audioDbSearch) {
+  audioDbSearch.addEventListener("keydown", function (event) {
     //Check if the pressed key is Enter
     if (event.key === "Enter") {
       searchArtist();
     }
   });
+}
+// document
+//   .getElementById("audioDbSearch")
+//   .addEventListener("keydown", function (event) {
+//     //Check if the pressed key is Enter
+//     if (event.key === "Enter") {
+//       searchArtist();
+//     }
+//   });
 
 // Function to search for an artist using async/await
-async function searchArtist() {
-  const artistName = document.getElementById("audioDbSearch").value;
-  const serverUrl = `/searchArtist?artist=${encodeURIComponent(artistName)}`;
+async function searchArtist(e) {
+  let artistName = "";
+  let serverUrl = "";
+  let userInput = "";
+  const audioDbSearch = document.getElementById("audioDbSearch");
+  if (audioDbSearch) {
+    userInput = audioDbSearch.value;
+    artistName = userInput;
+  } else if (e.target && e.target.hasAttribute("data-artistName")) {
+    artistName = e.target.getAttribute("data-artistName");
+    localStorage.setItem("searchedArtistName", artistName);
+    try {
+      window.location.href = `/api/favorite/${artistName}`;
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  }
+  if (!artistName) {
+    artistName = localStorage.getItem("searchedArtistName");
+    localStorage.removeItem("searchedArtistName"); 
+  }
 
+  serverUrl = `/searchArtist?artist=${encodeURIComponent(artistName)}`;
+  console.log(serverUrl);
   try {
     const response = await fetch(serverUrl);
     if (!response.ok) {
@@ -70,7 +116,8 @@ async function searchArtist() {
     await getMusicBrainzData(data);
     //Add an event listener to bookmark an artist
     const bookmark = document.getElementById("bookmark");
-    favoriteArtist(artistName, bookmark);
+    console.log(artistName, bookmark);
+    await favoriteArtist(artistName, bookmark);
     bookmark.addEventListener("click", function () {
       bookmarkHandler(bookmark, artistName);
     });
@@ -78,6 +125,29 @@ async function searchArtist() {
     console.error("error:", err);
   }
 }
+
+async function searchFavArtist(artist)  {
+  serverUrl = `/searchArtist?artist=${encodeURIComponent(artist)}`;
+  try {
+    const response = await fetch(serverUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    displayArtistInfo(data);
+    await fetchMusicVideos(data);
+    await getMusicBrainzData(data);
+    //Add an event listener to bookmark an artist
+    const bookmark = document.getElementById("bookmark");
+    await favoriteArtist(artist, bookmark);
+    bookmark.addEventListener("click", function () {
+      bookmarkHandler(bookmark, artistName);
+    });
+  } catch (err) {
+    console.error("error:", err);
+  }
+}
+
 
 async function bookmarkHandler(bm, name) {
   if (bm.classList.contains("bx-bookmark-heart")) {
@@ -137,6 +207,7 @@ async function RemoveFavoriteArtist(artist) {
 
 //function to check if the searched artist is already in the user's favorite artists list
 async function favoriteArtist(artist, bookmark) {
+  console.log("favoriteArtist called");
   try {
     const response = await fetch("/api/favorite", {
       method: "GET",
@@ -180,8 +251,13 @@ function displayArtistInfo(data) {
             <p><strong>Country:</strong> ${artist.strCountry}</p>
             <p><strong>Genre:</strong> ${artist.strGenre}</p>
             <p><strong>Label:</strong> ${artist.strLabel}</p>
-            <p><strong>Website:</strong> <a href="${artist.strWebsite}" target="_blank">${artist.strWebsite}</a></p>
-            <p><strong>Biography:</strong><br>${artist.strBiographyEN.replace(/\n/g, '<br>')}</p>
+            <p><strong>Website:</strong> <a href="${
+              artist.strWebsite
+            }" target="_blank">${artist.strWebsite}</a></p>
+            <p><strong>Biography:</strong><br>${artist.strBiographyEN.replace(
+              /\n/g,
+              "<br>"
+            )}</p>
         `;
 
     //Append the HTML to the resultsDiv
@@ -302,8 +378,21 @@ function displayMusicBrainzData(musicBrainzData) {
     //Append the HTML to the mbDataDiv
     mbDataDiv.innerHTML = mbDataHTML;
     resultDiv.append(mbDataDiv);
-
   } else {
     mbDataDiv.innerHTML = "No MusicBrainz data available for this artist.";
   }
 }
+
+//function to check if the url is from /api/favorite/:artistName router
+//and gather the artist name if it is. 
+function favoriteArtistcheck() {
+  var query = window.location.search.substring(1);
+  var params = new URLSearchParams(query);
+  const favArtist = params.get('artistName');
+  if (!favArtist)  {
+    return;
+  } else {
+    searchFavArtist(favArtist);
+  };
+}
+
