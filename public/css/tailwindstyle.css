@@ -952,6 +952,28 @@ h2 {
   padding-left: 40px;
 }
 
+/* result box styling*/
+.new-text-result {
+  background: linear-gradient(to right, #FFFFFF, #FFD700, #FFFFFF);
+  -webkit-background-clip: text; 
+  background-clip: text; 
+  color: transparent; 
+  text-align: left;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#container {
+  display: none;
+  border-radius: 15px;
+  margin: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(225, 225, 225, 0.2);
+  border-image: initial;
+  padding: 20px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.3) 75%, rgba(255, 255, 255, 0.35) 100%);
+}
+
 .padding-top {
   padding-top: 55px;
 }
@@ -1244,6 +1266,8 @@ h2 {
   margin: 0 auto;
 }
 
+
+
 .hover\:bg-gradient:hover {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
   --tw-gradient-from: #000 var(--tw-gradient-from-position);
@@ -1299,3 +1323,4 @@ h2 {
     margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 }
+
