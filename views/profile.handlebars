@@ -1,12 +1,12 @@
-<div id="profile" class="grid gap-12 items-center justify-center padding-top">
+<div id="profile" class="profile-container">
 
-<h1 class="new-text-gradient form-divs font-playpen pb-3">My Favorite Artists</h1>
+<h1 class="profile-header">My Favorite Artists</h1>
 {{!-- <h2 class="new-text-gradient form-text font-playpen">My Favorite Artists</h2> --}}
 
 {{#if favArtists.length}}
-  <ul class="favorite-artists font-playpen ">
+  <ul class="fav-artist">
     {{#each favArtists}}
-      <button class="new-text-gradient artist" data-artistName="{{this}}">{{this}}</button>
+      <button class="fav-artist-btn artist" data-artistName="{{this}}">{{this}}</button>
     {{/each}}
   </ul>
 {{else}}
