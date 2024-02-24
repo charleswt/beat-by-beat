@@ -111,8 +111,18 @@ app.get('/getMusicBrainzData', async (req, res) => {
   }
 });
 
+
 //commented out untill can get functioning
 app.use(routes);
+
+// Catch-all route for handling undefined endpoints, placed after your routes
+app.use('*', (req, res) => {
+  const statusCode = 404; 
+  res.status(statusCode).render("game", {
+    layout: "error",
+    status: statusCode,
+  });
+});
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
