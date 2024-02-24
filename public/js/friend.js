@@ -56,3 +56,32 @@ const getName = async (userId) => {
     const inputValue = document.getElementById('inputField').value;
     searchUser(inputValue)
    });
+
+   const deleteFriend = async (deleteId) => {
+    console.log(deleteId)
+    try {
+        const response = await fetch(`/api/users/deleteFriend/${deleteId}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+
+        })
+
+        if (response.ok) {
+            console.log('Deleted user with the id of', deleteId);
+          } else {
+            console.error('Could not find a user with the id of', deleteId);
+          }
+    } catch(err){
+        console.error(err);
+        res.status(500).json({})
+    }
+   }
+
+   document.querySelector('.delete-btn-dashboard')
+   .addEventListener('click', (event)=> {
+    console.log(event)
+       const deleteId = event.target.getAttribute('data-deleteId');
+       deleteFriend(deleteId);
+   });

@@ -156,19 +156,42 @@ console.log(loggedInUserId);
 
 router.get('/getUsers/:user', async (req, res) => {
   try {
-    const gotUser = req.params.user;
-    console.log(gotUser);
+    const user = req.params.user;
+    console.log(user);
 
     const users = await User.findAll({
       attributes: ["id", "name"],
       where: {
-        name: gotUser,
+        name: user,
       },
     });
 
     const userDataLookup = users.map((project) => project.get({ plain: true }));
     console.log(userDataLookup);
-    res.render("dashboard", { logged_in: req.session.logged_in, userDataLookup });
+
+    res.render("dashboard", { userDataLookup }); // Use res.render to render the HTML page
+  } catch (err) {
+    console.log(err);
+    res.status(500).render("game", {
+      layout: "error",
+      status: 500,
+    });
+  }
+});
+
+router.delete('/deleteFriend/:deleteId', async (req, res) => {
+  try {
+    const deleteId = req.params.deleteId;
+
+    await Friends.destroy({
+      where: {
+        user_id: req.session.user_id,
+        friend_id: deleteId,
+      },
+    });
+  
+    res.status(200).json({ message: 'Friend deleted successfully.' });
+    location.reload()
   } catch (err) {
     console.log(err);
     res.status(500).render("game", {

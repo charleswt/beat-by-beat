@@ -1212,6 +1212,15 @@ h2 {
   margin-left: auto;
 }
 
+.friend-delete {
+  padding: 0.5rem;
+  background-color: #f57070;
+  border-radius: 0.4rem;
+  color: white;
+  font-size: 1rem;
+  margin-left: auto;
+}
+
 .search-bar-dashboard {
   border-bottom-left-radius: 3rem;
   border-top-left-radius: 3rem;
@@ -1254,7 +1263,51 @@ h2 {
   margin: 0 auto;
 }
 
-<<<<<<< HEAD
+/* profile */
+
+#profile {
+  background: linear-gradient(145deg, #d6d6d6, #292929);
+  height: 85vh;
+}
+
+.profile-container {
+  margin-top: 40px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-header {
+  padding-bottom: 10px;
+}
+
+.fav-artist {
+  list-style: none;
+  padding: 0;
+  width: 50%;
+}
+
+.fav-artist-btn {
+  display: block;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+  color: #333;
+  text-decoration: none;
+}
+
+.fav-artist-btn:hover {
+  background-color: #7c3aed;
+  color: #fff;
+}
+
+/* profile */
+
 /* max width and max height */
 
 /* Equivalent to max-w-screen-md */
@@ -1311,53 +1364,6 @@ h2 {
   /* Styles */
 }
 
-=======
-/* profile */
-
-#profile {
-  background: linear-gradient(145deg, #d6d6d6, #292929);
-  height: 85vh;
-}
-
-.profile-container {
-  margin-top: 40px;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.profile-header {
-  padding-bottom: 10px;
-}
-
-.fav-artist {
-  list-style: none;
-  padding: 0;
-  width: 50%;
-}
-
-.fav-artist-btn {
-  display: block;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  text-align: center;
-  color: #333;
-  text-decoration: none;
-}
-
-.fav-artist-btn:hover {
-  background-color: #7c3aed;
-  color: #fff
-}
-
-/* profile */
-
->>>>>>> 1be6445120c5d4d70cd8665e7b6806bbe59ea539
 .hover\:bg-gradient:hover {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
   --tw-gradient-from: #000 var(--tw-gradient-from-position);
