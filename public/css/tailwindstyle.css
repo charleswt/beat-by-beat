@@ -1226,64 +1226,6 @@ h2 {
   margin: 0 auto;
 }
 
-<<<<<<< HEAD
-/* max width and max height */
-
-/* Equivalent to max-w-screen-md */
-
-@media (max-width: 768px) {
-  .max-w-screen-md {
-    max-width: 100%;
-  }
-}
-
-/* Equivalent to max-h-screen-md */
-
-@media (max-height: 768px) {
-  .max-h-screen-md {
-    max-height: 100%;
-  }
-}
-
-/* responsive login */
-
-@media only screen and (max-width: 320px) {
-  .form-container {
-    margin-top: auto;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
-  .max-w-screen-md {
-    max-width: 100%;
-  }
-
-  .px-8 {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  style {
-    width: 346px;
-  }
-
-  /* Styles */
-}
-
-/* iPads (portrait and landscape)  */
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* Styles */
-}
-
-/* Desktops and laptops  */
-
-@media only screen and (min-width: 1224px) {
-  /* Styles */
-}
-
-=======
 /* profile */
 
 #profile {
@@ -1324,12 +1266,71 @@ h2 {
 
 .fav-artist-btn:hover {
   background-color: #7c3aed;
-  color: #fff
+  color: #fff;
 }
 
 /* profile */
 
->>>>>>> 1be6445120c5d4d70cd8665e7b6806bbe59ea539
+/* max width and max height */
+
+/* Equivalent to max-w-screen-md */
+
+@media (max-width: 768px) {
+  .max-w-screen-md {
+    max-width: 100%;
+  }
+}
+
+/* Equivalent to max-h-screen-md */
+
+@media (max-height: 768px) {
+  .max-h-screen-md {
+    max-height: 100%;
+  }
+}
+
+/* responsive login */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 760) {
+  .search-width {
+    width: 100%;
+    margin: auto;
+  }
+
+  .px-8 {
+    padding-left: px;
+    padding-right: px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  h2 {
+    font-size: 10px;
+  }
+}
+
+/* iPads (portrait and landscape)  */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .search-width {
+    width: 100%;
+    margin: auto;
+  }
+
+  /* Styles */
+}
+
+/* Desktops and laptops  */
+
+@media only screen and (min-width: 1224px) {
+  .search-width {
+    width: 100%;
+    margin: auto;
+  }
+}
+
 .hover\:bg-gradient:hover {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
   --tw-gradient-from: #000 var(--tw-gradient-from-position);
