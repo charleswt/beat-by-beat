@@ -7,7 +7,16 @@
     <div class="scroll-bar">
 
         <div class="submit-btn">
-  {{htmlData}}
+  {{#if userDataLookup}}
+    <div class="prof-marg">
+      <div class="friend-box">
+        <div class="prof-align">
+          <p class="prof-marg">{{userDataLookup.name}}</p>
+          <button data-id={{userDataLookup.id}} class="friend-request">Add Friend</button>
+        </div>
+      </div>
+    </div>
+  {{/if}}
   </div>
 
   <div class="delete-btn-dashboard">
