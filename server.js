@@ -55,8 +55,12 @@ app.get('/searchArtist', async (req, res) => {
     const data = await response.json();
     res.send(data);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Server error');
+    const statusCode = 400;
+    // Render your template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,
+    });
   }
 });
 
@@ -74,8 +78,12 @@ app.get('/fetchMusicVideos', async (req, res) => {
     const data = await response.json();
     res.json(data);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Server error' });
+    const statusCode = 400;
+    // Render your template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,
+    });
   }
 });
 
@@ -94,13 +102,27 @@ app.get('/getMusicBrainzData', async (req, res) => {
     const data = await response.json();
     res.json(data);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Server error' });
+    const statusCode = 400;
+    // Render your template and pass the status code as part of the data object
+    res.status(statusCode).render("game", {
+      layout: "error",
+      status: statusCode,
+    });
   }
 });
 
+
 //commented out untill can get functioning
 app.use(routes);
+
+// Catch-all route for handling undefined endpoints, placed after your routes
+app.use('*', (req, res) => {
+  const statusCode = 404; 
+  res.status(statusCode).render("game", {
+    layout: "error",
+    status: statusCode,
+  });
+});
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
