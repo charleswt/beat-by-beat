@@ -157,26 +157,18 @@ console.log(loggedInUserId);
 router.get('/getUsers/:user', async (req, res) => {
   try {
     const gotUser = req.params.user;
-    console.log(gotUser, 'something else');
+    console.log(gotUser);
 
     const users = await User.findAll({
       attributes: ["id", "name"],
-      include: [
-        {
-          model: User,
-          as: 'friends',
-          through: Friends,
-          attributes: ["id", "name"],
-          where: {
-            name: gotUser, // Corrected syntax for filtering based on related model's attribute
-          },
-        },
-      ],
+      where: {
+        name: gotUser,
+      },
     });
 
-    const userData = users.map((project) => project.get({ plain: true }));
-    console.log(userData);
-    res.render("dashboard", { logged_in: req.session.logged_in, userData });
+    const userDataLookup = users.map((project) => project.get({ plain: true }));
+    console.log(userDataLookup);
+    res.render("dashboard", { logged_in: req.session.logged_in, userDataLookup });
   } catch (err) {
     console.log(err);
     res.status(500).render("game", {

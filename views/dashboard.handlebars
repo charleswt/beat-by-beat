@@ -6,20 +6,34 @@
     </div>
     <div class="scroll-bar">
         <div class="submit-btn">
-  {{#each userData as | friend |}}
-    <div class="prof-marg">
-      <div class="friend-box">
-        <div class="prof-align">
-          <p class="prof-marg">{{friend.name}}</p>
-          <p class="prof-marg">{{friend.artistArray}}</p>
-          <button data-id={{friend.id}} class="friend-request">Add Friend</button>
-        </div>
+{{#each userDataLookup as | user |}}
+  <div class="prof-marg">
+    <div class="friend-box">
+      <div class="prof-align">
+        <p class="prof-marg">{{user.name}}</p>
+        <button data-id={{user.id}} class="friend-request">Add Friend</button>
       </div>
     </div>
-  {{/each}}
+  </div>
+{{/each}}
+  {{#each userData as | friend |}}
+  <div class="prof-marg">
+    <div class="friend-box">
+      <div class="prof-align">
+        {{#each friend.friends as | friendDetail |}}
+          <p class="prof-marg">{{friendDetail.name}}</p>
+          <!-- Other properties from the friendDetail object can be accessed similarly -->
+          <!-- For example: -->
+          <p class="prof-marg">{{friendDetail.id}}</p>
+        {{/each}}
+        <!-- Additional properties from the friend object can be accessed here -->
+        <p class="prof-marg">{{friend.artistArray}}</p>
+      </div>
+    </div>
+  </div>
+{{/each}}
   </div>
   </div>
 </div>
 </div>
 <script src="/js/friend.js"></script>
-<script src="/js/script.js"></script>

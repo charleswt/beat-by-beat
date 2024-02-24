@@ -16,7 +16,16 @@ User.belongsToMany(User, {
     through: Friends,
     as: 'friends',
     foreignKey: 'user_id'
-    
 });
 
+Friends.belongsTo(User, {
+    foreignKey: 'user_id',
+    as: 'user',
+  });
+  
+  Friends.belongsTo(User, {
+    foreignKey: 'friend_id',
+    as: 'friend',
+  });
+  
 module.exports = { User, Profile, Friends };
