@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { User } = require("../models");
-const { Profile } = require("../models");
+const { User, Profile, Friends } = require("../models");
 const authenticate = require("../utils/authentication.js");
+const { Op } = require("sequelize");
 
 router.get("/", authenticate, async (req, res) => {
   console.log(`request${req.session}`);
@@ -20,9 +20,8 @@ router.get("/", authenticate, async (req, res) => {
 router.get("/dashboard", authenticate, async (req, res) => {
   console.log("hello world!")
   try {
-    const users = await User.findAll({
-      //where: { name: req.body.email },
-    });
+
+    const users = await User.findAll({});
     
     const userData = users.map((project) => project.get({ plain: true }));
     console.log(userData);
@@ -37,6 +36,7 @@ router.get("/dashboard", authenticate, async (req, res) => {
     });
   }
 });
+
 
 router.get("/profile", authenticate, async (req, res) => {
   try {

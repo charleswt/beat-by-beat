@@ -113,19 +113,17 @@ router.post("/logout", (req, res) => {
 });
 
 router.post('/friendsId/:userId', async (req, res) => {
-
-  const userId = req.params.userId;
-  console.log(userId);
-
   try {
-    // Find the current logged-in user, you may have to adjust this based on your authentication logic
-    const loggedInUserId = req.session.user_id; // Replace with your actual logged-in user ID
+  const user = req.params.userId;
+  const numberId = Number(user)
+  console.log(numberId);
+    const loggedInUserId = req.session.user_id;
 console.log(loggedInUserId);
     // Check if the friendship already exists
-    const existingFriendship = await Friends.findOne({
+    const existingFriendship = await Friends.findOrCreate({
       where: {
         user_id: loggedInUserId,
-        friend_id: userId,
+        friend_id: numberId,
       },
     });
 
@@ -135,9 +133,12 @@ console.log(loggedInUserId);
     }
 
     // Create a new friendship
+    console.log("loggedInUserId:", loggedInUserId);
+    console.log("numberId:", numberId);
+    
     const newFriendship = await Friends.create({
-      userId: loggedInUserId,
-      friendId: userId,
+      user_id: loggedInUserId,
+      friend_id: numberId,
     });
 
     // You can do additional logic or send a response as needed
@@ -149,6 +150,38 @@ console.log(loggedInUserId);
     res.status(statusCode).render("game", {
       layout: "error",
       status: statusCode,
+    });
+  }
+});
+
+router.get('/getUsers/:user', async (req, res) => {
+  try {
+    const gotUser = req.params.user;
+    console.log(gotUser, 'something else');
+
+    const users = await User.findAll({
+      attributes: ["id", "name"],
+      include: [
+        {
+          model: User,
+          as: 'friends',
+          through: Friends,
+          attributes: ["id", "name"],
+          where: {
+            name: gotUser, // Corrected syntax for filtering based on related model's attribute
+          },
+        },
+      ],
+    });
+
+    const userData = users.map((project) => project.get({ plain: true }));
+    console.log(userData);
+    res.render("dashboard", { logged_in: req.session.logged_in, userData });
+  } catch (err) {
+    console.log(err);
+    res.status(500).render("game", {
+      layout: "error",
+      status: 500,
     });
   }
 });
