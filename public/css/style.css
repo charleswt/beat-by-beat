@@ -176,6 +176,7 @@ h2 {
 .w-medium {
   width: 700px;
 }
+
 .py-14 {
   padding-top: 56px;
   padding-bottom: 56px;
@@ -381,7 +382,9 @@ h2 {
   background-color: #7c3aed;
   color: #fff;
 }
-
+/* .style-h {
+  height: 85vh;
+} */
 /* profile */
 
 /* max width and max height */
@@ -402,13 +405,17 @@ h2 {
 /* responsive login */
 @media only screen and (min-device-width: 320px) and (max-device-width: 760) {
   .search-width {
-    width: 100%;
+    width: 95%;
     margin: auto;
   }
-  .px-8 {
-    padding-left: px;
-    padding-right: px;
+  .px-1 {
+    padding-left: 1px;
+    padding-right: 1px;
   }
+
+  /* .w-small {
+    width: 65%;
+  } */
   h1 {
     font-size: 25px;
   }
@@ -423,6 +430,9 @@ h2 {
     width: 100%;
     margin: auto;
   }
+  .style-h {
+    height: 85vh;
+  }
   /* Styles */
 }
 /* Desktops and laptops  */
@@ -430,5 +440,8 @@ h2 {
   .search-width {
     width: 100%;
     margin: auto;
+  }
+  .style-h {
+    height: 85vh;
   }
 }
