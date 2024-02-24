@@ -1,7 +1,7 @@
 const getName = async (userId) => {
     try {
         console.log(userId)
-      const response = await fetch(`/api/users/friendsId/${userId}`, {
+      const response = await fetch(`/api/friends/friendsId/${userId}`, {
         method: 'POST',
         body: JSON.stringify({}),
         headers: {
@@ -32,7 +32,7 @@ const getName = async (userId) => {
    const searchUser = async (user) => {
     console.log(user)
     try {
-        const response = await fetch(`/api/users/getUsers/${user}`, {
+        const response = await fetch(`/api/friends/getUsers/${user}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const getName = async (userId) => {
           }
     } catch(err){
         console.error(err);
-        res.status(500).json({})
+        res.status(500).json({ message: 'Could not find' + user + 'Ln 50' })
     }
    }
 
@@ -60,7 +60,7 @@ const getName = async (userId) => {
    const deleteFriend = async (deleteId) => {
     console.log(deleteId)
     try {
-        const response = await fetch(`/api/users/deleteFriend/${deleteId}`, {
+        const response = await fetch(`/api/friends/deleteFriend/${deleteId}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',

@@ -60,7 +60,6 @@ router.get("/dashboard", authenticate, async (req, res) => {
   }
 });
 
-
 router.get("/profile", authenticate, async (req, res) => {
   try {
     const profileData = await Profile.findByPk(req.session.user_id);

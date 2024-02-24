@@ -5,18 +5,11 @@
     <button id="search-listen-dashboard" type="submit" id="search-listen-dashboard" class="search-btn-dashboard">Search</button>
     </div>
     <div class="scroll-bar">
+
         <div class="submit-btn">
-  {{#each userDataLookup}}
-    <div class="prof-marg">
-      <div class="friend-box">
-        <div class="prof-align">
-          <p class="prof-marg">{{name}}</p>
-          <button data-id={{id}} class="friend-request">Add Friend</button>
-        </div>
-      </div>
-    </div>
-  {{/each}}
+  {{htmlData}}
   </div>
+
   <div class="delete-btn-dashboard">
   {{#each userData.friends as | friend |}}
     <div class="prof-marg">
@@ -29,6 +22,7 @@
     </div>
   {{/each}}
   </div>
+
   </div>
 </div>
 </div>
