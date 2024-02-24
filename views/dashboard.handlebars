@@ -1,15 +1,38 @@
-<div class="bg-color submit-btn">
-  {{#each userData as | friend |}}
+<div class="bg-dash">
+    <div class="prof-marg">
+    <div class="search-bar-row-dashboard">
+        <input id="inputField" type="text" placeholder="Search.." class="search-bar-dashboard dash-input">
+    <button id="search-listen-dashboard" type="submit" id="search-listen-dashboard" class="search-btn-dashboard">Search</button>
+    </div>
+    <div class="scroll-bar">
+
+        <div class="submit-btn">
+  {{#if userDataLookup}}
+    <div class="prof-marg">
+      <div class="friend-box">
+        <div class="prof-align">
+          <p class="prof-marg">{{userDataLookup.name}}</p>
+          <button data-id={{userDataLookup.id}} class="friend-request">Add Friend</button>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+  </div>
+
+  <div class="delete-btn-dashboard">
+  {{#each userData.friends as | friend |}}
     <div class="prof-marg">
       <div class="friend-box">
         <div class="prof-align">
           <p class="prof-marg">{{friend.name}}</p>
-          <p class="prof-marg">{{friend.artistArray}}</p>
-          <button data-id={{friend.id}} class="friend-request">Add Friend</button>
+          <button data-deleteId={{friend.id}} class="friend-delete">Delete Friend</button>
         </div>
       </div>
     </div>
   {{/each}}
+  </div>
+
+  </div>
+</div>
 </div>
 <script src="/js/friend.js"></script>
-<script src="/js/script.js"></script>
