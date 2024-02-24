@@ -1293,14 +1293,18 @@ h2 {
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 760) {
   .search-width {
-    width: 100%;
+    width: 95%;
     margin: auto;
   }
 
-  .px-8 {
-    padding-left: px;
-    padding-right: px;
+  .px-1 {
+    padding-left: 1px;
+    padding-right: 1px;
   }
+
+  /* .w-small {
+    width: 65%;
+  } */
 
   h1 {
     font-size: 25px;
