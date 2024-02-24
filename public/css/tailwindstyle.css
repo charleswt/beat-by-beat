@@ -1269,6 +1269,10 @@ h2 {
   color: #fff;
 }
 
+/* .style-h {
+  height: 85vh;
+} */
+
 /* profile */
 
 /* max width and max height */
@@ -1323,6 +1327,10 @@ h2 {
     margin: auto;
   }
 
+  .style-h {
+    height: 85vh;
+  }
+
   /* Styles */
 }
 
@@ -1332,6 +1340,10 @@ h2 {
   .search-width {
     width: 100%;
     margin: auto;
+  }
+
+  .style-h {
+    height: 85vh;
   }
 }
 
