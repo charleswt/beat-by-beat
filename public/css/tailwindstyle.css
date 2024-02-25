@@ -1225,7 +1225,7 @@ h2 {
 .search-bar-dashboard {
   border-bottom-left-radius: 3rem;
   border-top-left-radius: 3rem;
-  padding: .3rem;
+  padding: 0.3rem;
   border-left: 2px solid #333;
   border-top: 2px solid #333;
   border-bottom: 2px solid #333;
@@ -1244,7 +1244,7 @@ h2 {
 .search-btn-dashboard {
   border-bottom-right-radius: 3rem;
   border-top-right-radius: 3rem;
-  padding: .3rem;
+  padding: 0.3rem;
   border-right: 2px solid #333;
   border-top: 2px solid #333;
   border-bottom: 2px solid #333;
@@ -1383,6 +1383,39 @@ h2 {
   .style-h {
     height: 85vh;
   }
+}
+
+/* Keyframes definition */
+
+@keyframes backgroundSlide {
+  0% {
+    background-position: 0 0%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Animation definitions */
+
+.animated-bg {
+  background-image: url(https://cdn.pixabay.com/photo/2022/06/08/05/47/stars-7249785_1280.jpg?auto=compress&dpr=1);
+  animation-name: backgroundSlide;
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+  animation-fill-mode: forwards;
+}
+
+.animated-bg-slide {
+  animation-name: backgroundSlide;
+  animation-duration: 240s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+  animation-fill-mode: forwards;
 }
 
 .hover\:bg-gradient:hover {
