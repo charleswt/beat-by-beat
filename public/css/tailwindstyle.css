@@ -1239,6 +1239,7 @@ h2 {
   width: 100%;
   margin-top: 2rem;
   min-height: 80%;
+  overflow: auto;
 }
 
 .search-btn-dashboard {
@@ -1257,7 +1258,7 @@ h2 {
   justify-content: center;
 }
 
-/*\/ dashboard cards /\*/
+/*/\ dashboard cards /\*/
 
 .search-width {
   width: 60%;
