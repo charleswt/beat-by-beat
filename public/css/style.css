@@ -22,7 +22,8 @@
 }
 
 /* DO  NOT TOUCH ABOVE CODE */
-html, body {
+html,
+body {
   background-color: #000;
   display: flex;
   flex-direction: column;
@@ -499,6 +500,7 @@ h2 {
 /* Animation definitions */
 .animated-bg {
   background-image: url(https://cdn.pixabay.com/photo/2022/06/08/05/47/stars-7249785_1280.jpg?auto=compress&dpr=1);
+  background-size: cover;
   animation-name: backgroundSlide;
   animation-duration: 50s;
   animation-timing-function: linear;
