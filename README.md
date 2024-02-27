@@ -1,94 +1,64 @@
-# beat-by-beat
+# Beat-by-Beat
 
-In this beat-by-beat project, you will work with a group to build a full-stack crowdfunding app using Node.js, Express.js, Sequelize, Handlebars.js, and MVC architecture.
+Beat By Beat is a user-friendly web application designed to cater to music enthusiasts seeking comprehensive information about their favorite artists and their music videos. Users can effortlessly search for artists and access detailed profiles fetched from the AudioDB API, including biographies, discographies, captivating images, and music videos. Additionally, Beat By Beat encourages social interaction by enabling users to like artists and connect with friends within the platform, fostering a vibrant community of music lovers.
 
-## User Stories
 
-* As a user, I want to be able to create an account.
+![preview](./public/image/preview.jpeg)
 
-* As a registered user, I want to login and search for beats.
+## Installation
 
-* As a user, I want to see a list of beats which I had search for.
+1. Clone this repository:
+```bash
+git clone git@github.com:charleswt/beat-by-beat.git
+```
+2. Navigate to the project root directory & install dependencies:
+```bash
+npm install
+```
+3. Set up a MySQL database and configure the connection in ./config/connection.js.
 
-### Acceptance Criteria
+4. Create a .env file and add necessary environment variables, including the API key for the AudioDB API.
 
-* The homepage route `/`  renders a list of all projects from the database.
+5. Run the command and then open local hosdt on your browser:
+```bash
+npm start
+```
 
-* The route `/signup`  renders a form to create a new account.
+### Usage
 
-* The `/profile/:id` route renders an individual saved search details based on the route parameter id. -CHK
+You can use the deplyoed site at [BeatbyBeat](https://beatbybeatv2-d6c2b024a00e.herokuapp.com/login)
 
-* The route `/login` renders a form to log in.
+- **Login or Sign up**: Create an account to access BeatbyBeat
+- **Search Artist**: Using the Search bar on the home page you can search for your favrotie artsits
+- **Favorite Artists**: Using the Profile tab you can easily see your favorties Artists
+- **Find and Add Friends**: Using the dashboard tab you can search for friends and add them
 
-* The existing user can enter their credentials on the login page to create a session on the server.
-
-* The new user can create an account on the signup page and then be immediately logged in with a session.
-
-* The route `/profile` or `/dashboard` renders the logged-in user's previously searched beats.
-
-* The logged in user should be able to visit the `/profile` or `/dashboard` route.
-
-* The user on the profile or dashboard page can use the form to create a new beat in the database.
-
-* The logged-in user can select a "Logout" button to remove their session.
-
-* The session for a logged-in user expires after a set time. - CHK
-
-* The code is organized using MVC architecture.
-
-* The views are rendered with Handlebars.js templates.
-
-## Specifications 
-
-* The database models have the following fields and associations:
-
-  * `User`
-
-    * `id`: primary key
-
-    * `name`
-
-    * `email`
-
-    * `password`
-
-  * `Beats`
-
-    * `id`: primary key
-
-    * `name`
-
-    * `description`
-
-    * `date_created`
-
-    * `user_id`: foreign key that references `User.id`
-
-  * Users have many saves beats belong to a user.
-
-    * If a user is deleted, all associated beats are also deleted.
 
  ## Technologies Used
 
-* node.js
-* Express.js
-* Sequelize
-* Handlebars.js
-* MVC architecture
+- Tailwind CSS
+- Node.js: Backend runtime environment for executing JavaScript code.
+- Express.js: Web application framework for building server-side functionality.
+- Handlebars.js: Templating engine for generating dynamic HTML content.
+- Sequelize: ORM (Object-Relational Mapping) for interacting with the database.
+- MySQL: Database management system for storing user and artist data.
+- Fetch API: Used to make HTTP requests to external APIs such as the AudioDB and MusicBrainz APIs.
+- Crypto: Utilized for generating secure session secrets.
+- dotenv: Environment variable management for storing sensitive information.
+- express-session: Middleware for managing user sessions.
+- connect-session-sequelize: Session store for storing session data in the database.
 
-## Roles and Responsibilities
+## Contributors
 
-Judith Hernandez: Front End: Working with Style and Landing Page
-Robert Solorzano: Backend: Working with API fetch/response
-lucy(Jihyeon) kwon: Working on error handling routes
-Charles Tiffany: Working on user routes and home routes
-Harika Patha: Quality Assurance: Testing & Documentation, aboutUs handlebars
+Judith Hernandez - @judy-her
+Robert Solorzano - @robertsolorzano
+Lucy Jihyeon Kwon - @lucyJihyeon
+Charles Tiffany - charleswt
+Harika Patha - Harikapatha
 
-## Challenges
-
-* Chk with the team
 
 ## Source Code Repository
 
-* https://github.com/charleswt/beat-by-beat 
+@judy-her
+[Beat-by-Beat-1.0](https://github.com/judy-her/beat-by-beat)
 
