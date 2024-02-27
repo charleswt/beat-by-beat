@@ -16,7 +16,7 @@ router.get('/getUsers/:user', async (req, res) => {
       const userDataLookup = users.get({ plain: true });
       console.log(userDataLookup, 'Ln 17');
   
-      res.render("dashboard", { userDataLookup }); // Use res.render to render the HTML page
+      res.json( userDataLookup );
       console.log(userDataLookup, 'Ln 20')
     } catch (err) {
       console.log(err);

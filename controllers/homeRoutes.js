@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const { User, Profile, Friends } = require("../models");
 const authenticate = require("../utils/authentication.js");
-const { Op } = require("sequelize");
 
 router.get("/", authenticate, async (req, res) => {
   console.log(`request${req.session}`);

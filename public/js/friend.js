@@ -25,7 +25,7 @@ const getName = async (userId) => {
     console.log(event)
     if (event.target.tagName === "BUTTON") {
        const userId = event.target.getAttribute('data-id');
-       getName(userId);
+       getName(userId).then(() => location.reload());
     }
    });
 
@@ -39,9 +39,23 @@ const getName = async (userId) => {
             },
 
         })
-
+        console.log(response + 'Ln 42')
         if (response.ok) {
+          const jsonResponse = await response.json();
+          console.log(jsonResponse);
             console.log('Found', user);
+            let container = document.getElementById('searchResults');
+            let newFriend = document.createElement('p');
+            newFriend.innerHTML = 
+            `<div id="searchResults" class="prof-marg">
+            <div class="friend-box">
+              <div class="prof-align">
+                <p class="prof-marg">${jsonResponse.name}</p>
+                <button data-id=${jsonResponse.id} class="friend-request">Add Friend</button>
+              </div>
+            </div>
+          </div>`;
+            container.appendChild(newFriend);
           } else {
             console.error('Could not find', user);
           }
@@ -83,5 +97,5 @@ const getName = async (userId) => {
    .addEventListener('click', (event)=> {
     console.log(event)
        const deleteId = event.target.getAttribute('data-deleteId');
-       deleteFriend(deleteId);
+       deleteFriend(deleteId).then(() => location.reload());
    });
