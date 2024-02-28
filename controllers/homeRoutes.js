@@ -61,14 +61,33 @@ router.get("/dashboard", authenticate, async (req, res) => {
 
 router.get("/profile", authenticate, async (req, res) => {
   try {
-    const profileData = await Profile.findByPk(req.session.user_id);
-    const favArtists = profileData.favArtists || [];
+    const profileData = await User.findByPk(req.session.user_id, {
+      include: [{ 
+        model: User,
+        as: 'friends',
+        attributes: ['id', 'name'],
+        through: { attributes: []},
+      },
+      {
+        model: Profile,
+        attributes: ['favArtists']
+      },
+    ],
+    });
+    const favArtists = profileData.profile.favArtists || [];
+    const friendsList = profileData.friends ? profileData.friends.map(friends => ({
+      id: friends.id,
+      name: friends.name,
+    })) : [];
+
     console.log('favArtists:', favArtists); //debugging
     console.log('logged_in:', req.session.logged_in); //debbugging
+    console.log('friendsList: ', friendsList);
     res.render("profile", {
       logged_in: 
       req.session.logged_in,
-      favArtists
+      favArtists,
+      friendsList,
     });
   }  catch (err) {
     const statusCode = 500;

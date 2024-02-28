@@ -12,5 +12,16 @@
 {{else}}
   <p>You have no favorite artists saved.</p>
 {{/if}}
+
+<h1 class="profile-header margin-t">My FriendsList</h1>
+{{#if friendsList.length}}
+  <ul class="fav-artist">
+    {{#each friendsList as |friend|}}
+      <button class="fav-artist-btn artist">{{friend.name}}</button>
+    {{/each}}
+  </ul>
+{{/if}}
+
+
 </div>
 <script src="/js/script.js"></script>
