@@ -1,4 +1,3 @@
-
 console.log("I am connected :)");
 // Burger menus
 document.addEventListener("DOMContentLoaded", function () {
@@ -41,8 +40,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   favoriteArtistcheck();
-
 });
+
+const viewFriendsProfile = (e) => {
+  e.preventDefault();
+  const friendId = e.currentTarget.getAttribute('data-id');
+  console.log(friendId);
+  window.location.href = `/api/friends/profile/${friendId}`;
+}
+const friends = document.querySelectorAll(".friendBtn");
+console.log(friends);
+if (friends.length) {
+  friends.forEach((friend) => {
+    friend.addEventListener("click", viewFriendsProfile);
+  });
+}
 
 //Code For Api requests from AudioDB and MusicBrainz
 //Add an event listener to the Search Artist button
@@ -50,7 +62,6 @@ const searchBtn = document.getElementById("searchButton");
 if (searchBtn) {
   searchBtn.addEventListener("click", searchArtist);
 }
-//document.getElementById("searchButton").addEventListener("click", searchArtist);
 
 const favArtist = document.querySelectorAll(".artist");
 console.log(favArtist);
@@ -71,14 +82,6 @@ if (audioDbSearch) {
     }
   });
 }
-// document
-//   .getElementById("audioDbSearch")
-//   .addEventListener("keydown", function (event) {
-//     //Check if the pressed key is Enter
-//     if (event.key === "Enter") {
-//       searchArtist();
-//     }
-//   });
 
 // Function to search for an artist using async/await
 async function searchArtist(e) {
@@ -100,7 +103,7 @@ async function searchArtist(e) {
   }
   if (!artistName) {
     artistName = localStorage.getItem("searchedArtistName");
-    localStorage.removeItem("searchedArtistName"); 
+    localStorage.removeItem("searchedArtistName");
   }
 
   serverUrl = `/searchArtist?artist=${encodeURIComponent(artistName)}`;
@@ -126,7 +129,7 @@ async function searchArtist(e) {
   }
 }
 
-async function searchFavArtist(artist)  {
+async function searchFavArtist(artist) {
   serverUrl = `/searchArtist?artist=${encodeURIComponent(artist)}`;
   try {
     const response = await fetch(serverUrl);
@@ -147,7 +150,6 @@ async function searchFavArtist(artist)  {
     console.error("error:", err);
   }
 }
-
 
 async function bookmarkHandler(bm, name) {
   if (bm.classList.contains("bx-bookmark-heart")) {
@@ -384,15 +386,14 @@ function displayMusicBrainzData(musicBrainzData) {
 }
 
 //function to check if the url is from /api/favorite/:artistName router
-//and gather the artist name if it is. 
+//and gather the artist name if it is.
 function favoriteArtistcheck() {
   var query = window.location.search.substring(1);
   var params = new URLSearchParams(query);
-  const favArtist = params.get('artistName');
-  if (!favArtist)  {
+  const favArtist = params.get("artistName");
+  if (!favArtist) {
     return;
   } else {
     searchFavArtist(favArtist);
-  };
+  }
 }
-

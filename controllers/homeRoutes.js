@@ -89,7 +89,7 @@ router.get("/profile", authenticate, async (req, res) => {
       req.session.logged_in,
       favArtists,
       friendsList,
-      currentUser
+      currentUser,
     });
   }  catch (err) {
     const statusCode = 500;
