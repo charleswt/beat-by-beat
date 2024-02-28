@@ -79,15 +79,17 @@ router.get("/profile", authenticate, async (req, res) => {
       id: friends.id,
       name: friends.name,
     })) : [];
-
+    const currentUser = profileData.name
     console.log('favArtists:', favArtists); //debugging
     console.log('logged_in:', req.session.logged_in); //debbugging
     console.log('friendsList: ', friendsList);
+    console.log("current user's session", req.session, "current User:",profileData.name );
     res.render("profile", {
       logged_in: 
       req.session.logged_in,
       favArtists,
       friendsList,
+      currentUser
     });
   }  catch (err) {
     const statusCode = 500;
