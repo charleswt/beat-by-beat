@@ -1,28 +1,19 @@
 [
    {
-    "user_id" : 1,
-    "favArtists": ["Drake"],
-    "friends" : []
+    "user_id" : 1
    },
    {
-    "user_id" : 2,
-    "favArtists": ["Taylor Swift", "Billie Eilish"],
-    "friends" : []
+    "user_id" : 2
    },
    {
-    "user_id" : 3,
-    "favArtists": [],
-    "friends" : []
+    "user_id" : 3
+    
    },
    {
-    "user_id" : 4,
-    "favArtists": [],
-    "friends" : []
+    "user_id" : 4
    },
    {
-    "user_id" : 5,
-    "favArtists": [],
-    "friends" : []
+    "user_id" : 5
    }
 ]
   

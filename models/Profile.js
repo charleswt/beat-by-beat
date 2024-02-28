@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class Profile extends Model {}
 
@@ -10,18 +10,14 @@ Profile.init(
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'user', 
-        key: 'id',
+        model: "user",
+        key: "id",
       },
       unique: true,
     },
     favArtists: {
-      type: DataTypes.JSON, 
-      allowNull: true, 
-    },
-    friends: {
-        type: DataTypes.JSON,
-        allowNull: true,
+      type: DataTypes.JSON,
+      allowNull: true,
     },
   },
   {
@@ -29,7 +25,7 @@ Profile.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'profile',
+    modelName: "profile",
   }
 );
 

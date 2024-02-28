@@ -1,16 +1,37 @@
 <div id="profile" class="profile-container">
 
-<h1 class="profile-header">My Favorite Artists</h1>
-{{!-- <h2 class="new-text-gradient form-text font-playpen">My Favorite Artists</h2> --}}
+  <h1 class="profile-header">{{currentUser}}'s Favorite Artists</h1>
+  {{! <h2 class="new-text-gradient form-text font-playpen">My Favorite Artists</h2> }}
 
-{{#if favArtists.length}}
-  <ul class="fav-artist">
-    {{#each favArtists}}
-      <button class="fav-artist-btn artist" data-artistName="{{this}}">{{this}}</button>
-    {{/each}}
-  </ul>
-{{else}}
-  <p>You have no favorite artists saved.</p>
-{{/if}}
+  {{#if favArtists.length}}
+    <ul class="fav-artist">
+      {{#each favArtists}}
+        <button
+          class="fav-artist-btn artist"
+          data-artistName="{{this}}"
+        >{{this}}</button>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p> {{currentUser}} has no favorite artists saved.</p>
+  {{/if}}
+
+  <h1 class="profile-header margin-t"> {{currentUser}}'s FriendsList</h1>
+  {{#if friendsList.length}}
+    <ul class="fav-artist">
+      {{#each friendsList as |friend|}}
+        <button
+          class="fav-artist-btn friendBtn"
+          data-id="{{friend.id}}"
+        >{{friend.name}}</button>
+      {{/each}}
+    </ul>
+    <p class="">Ready to connect?
+      <a href="/dashboard" class="nav-text">&nbsp; adding friends now!</a></p>
+  {{else}}
+    <p>Expand your network and discover more!
+      <a href="/dashboard" class="nav-text">Add your first friend today.</a></p>
+  {{/if}}
+
 </div>
 <script src="/js/script.js"></script>
