@@ -62,3 +62,7 @@ Harika Patha - Harikapatha
 @judy-her
 [Beat-by-Beat-1.0](https://github.com/judy-her/beat-by-beat)
 
+@lucyJihyeon[404-ping-pong](https://github.com/lucyJihyeon/404-ping-pong)
+- Note that this project is inspired by the tutorial "Create the Pong Game in JavaScript" by CodeOne. The video provided a solid foundation and understanding of the core concepts required to develop a Pong game using JavaScript.
+
+
