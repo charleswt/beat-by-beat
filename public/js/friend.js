@@ -30,6 +30,7 @@ const getName = async (userId) => {
    });
 
    const searchUser = async (user) => {
+    const errMsg = document.querySelector('.err-Msg');
     console.log(user)
     try {
         const response = await fetch(`/api/friends/getUsers/${user}`, {
@@ -41,6 +42,7 @@ const getName = async (userId) => {
         })
         console.log(response + 'Ln 42')
         if (response.ok) {
+          errMsg.textContent = "";
           const jsonResponse = await response.json();
           console.log(jsonResponse);
             console.log('Found', user);
@@ -57,6 +59,7 @@ const getName = async (userId) => {
           </div>`;
             container.appendChild(newFriend);
           } else {
+            errMsg.textContent = "Cannot find a user with the username";
             console.error('Could not find', user);
           }
     } catch(err){
